@@ -1,644 +1,121 @@
-2026-11-23 02:30:15,905 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@medivault.test","password":"Password123!"}
-2026-11-23 02:30:16,139 method=PUT path=/api/patients/PAT-100001 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAbWVkaXZhdWx0LnRlc3QiLCJ1c2VyX2lkIjoxLCJlbWFpbCI6InBhdGllbnQwMUBtZWRpdmF1bHQudGVzdCIsInJvbGUiOiJwYXRpZW50IiwicGF0aWVudF9pZCI6IlBBVC0xMDAwMDEifQ.xlvIi1LPEaoYLeeNzmzatsvux54XUHQCPIGvPy69-lY body={"aadhaar_ref":"1002 4471 0001","medical_notes":"Confidential notes"}
-2026-11-23 02:30:44,398 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:30:45,655 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"WrongPassword!"}
-2026-11-23 02:30:46,887 method=POST path=/api/auth/register query= authorization= body={"email":"new_patient@example.test","password":"SecurePassword123!","full_name":"Meera Nambiar","role":"patient","date_of_birth":"1992-04-12","gender":"Female","phone":"+91-98765-00000","emergency_contact":"Father (+91-98765-00001)"}
-2026-11-23 02:30:48,123 method=POST path=/api/auth/register query= authorization= body={"email":"patient01@example.test","password":"Password123!","full_name":"Duplicate User"}
-2026-11-23 02:30:49,153 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:30:49,363 method=GET path=/api/auth/me query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:30:50,388 method=GET path=/api/auth/me query= authorization= body=
-2026-11-23 02:30:51,416 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:30:51,627 method=GET path=/api/patients/me query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:30:52,667 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:30:52,879 method=GET path=/api/patients/PAT-DEMO-002 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:30:53,910 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:30:54,123 method=GET path=/api/patients/PAT-UNKNOWN-999 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:30:55,150 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:30:55,374 method=PUT path=/api/patients/PAT-DEMO-001 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body={"allergies":"Penicillin, Latex, Pollen","medications":"Metformin 500mg, Lisinopril 10mg","emergency_contact":"Sunita Sharma (+91-98765-43219)","blood_group":"B+"}
-2026-11-23 02:30:56,417 method=GET path=/api/patients/me query= authorization= body=
-2026-11-23 02:30:57,458 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:30:57,671 method=GET path=/api/patients/PAT-DEMO-002 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:30:57,680 method=GET path=/api/patients/PAT-DEMO-002/reports query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:30:58,715 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:30:58,927 method=GET path=/api/patients/me query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:30:59,996 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:31:00,213 method=GET path=/api/privacy/consent query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:31:00,236 method=POST path=/api/privacy/consent query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body={"purpose":"third_party_sharing","is_granted":true}
-2026-11-23 02:31:01,341 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:31:01,565 method=POST path=/api/privacy/rights-request query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body={"request_type":"export","details":"Full health summary and diagnostic records"}
-2026-11-23 02:31:02,720 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:31:02,943 method=POST path=/api/privacy/grievance query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body={"subject":"Inquiry regarding data processing policy","description":"Requesting confirmation on retention period for inactive profile.","contact_email":"patient01@example.test"}
-2026-11-23 02:31:04,038 method=GET path=/api/privacy/consent query= authorization= body=
-2026-11-23 02:31:04,046 method=POST path=/api/privacy/rights-request query= authorization= body={"request_type":"export"}
-2026-11-23 02:31:05,100 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:31:05,313 method=POST path=/api/reports/upload query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=--a8d58ed16f6fda98ec10db6ea42a6bb1
+2026-11-23 05:23:12,132 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
+2026-11-23 05:23:12,145 method=PUT path=/api/patients/PAT-DEMO-001 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body={"aadhaar_ref":"1002 9999 8888","medical_notes":"Psychiatric consult: patient experiencing acute stress disorder."}
+2026-11-23 05:23:12,193 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
+2026-11-23 05:23:12,207 method=GET path=/api/patients/me query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
+2026-11-23 05:23:12,240 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
+2026-11-23 05:23:12,255 method=GET path=/api/patients/PAT-DEMO-002 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
+2026-11-23 05:23:12,290 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
+2026-11-23 05:23:12,303 method=GET path=/api/patients/PAT-UNKNOWN-999 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
+2026-11-23 05:23:12,332 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
+2026-11-23 05:23:12,345 method=PUT path=/api/patients/PAT-DEMO-001 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body={"allergies":"Penicillin, Latex, Pollen","medications":"Metformin 500mg, Lisinopril 10mg","emergency_contact":"Sunita Sharma (+91-98765-43219)","blood_group":"B+"}
+2026-11-23 05:23:12,381 method=GET path=/api/patients/me query= authorization= body=
+2026-11-23 05:23:12,413 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
+2026-11-23 05:23:12,426 method=GET path=/api/patients/PAT-DEMO-002 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
+2026-11-23 05:23:12,440 method=GET path=/api/patients/PAT-DEMO-002/reports query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
+2026-11-23 05:23:12,475 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
+2026-11-23 05:23:12,488 method=GET path=/api/patients/me query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
+2026-11-23 05:23:12,523 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
+2026-11-23 05:23:12,536 method=GET path=/api/privacy/consent query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
+2026-11-23 05:23:12,559 method=POST path=/api/privacy/consent query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body={"purpose":"third_party_sharing","is_granted":true}
+2026-11-23 05:23:12,600 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
+2026-11-23 05:23:12,613 method=POST path=/api/privacy/rights-request query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body={"request_type":"export","details":"Full health summary and diagnostic records"}
+2026-11-23 05:23:12,645 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
+2026-11-23 05:23:12,658 method=POST path=/api/privacy/grievance query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body={"subject":"Inquiry regarding data processing policy","description":"Requesting confirmation on retention period for inactive profile.","contact_email":"patient01@example.test"}
+2026-11-23 05:23:12,691 method=GET path=/api/privacy/consent query= authorization= body=
+2026-11-23 05:23:12,702 method=POST path=/api/privacy/rights-request query= authorization= body={"request_type":"export"}
+2026-11-23 05:23:12,732 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
+2026-11-23 05:23:12,745 method=DELETE path=/api/privacy/account query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
+2026-11-23 05:23:12,765 method=GET path=/api/patients/me query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
+2026-11-23 05:23:12,777 method=POST path=/api/auth/login query= authorization= body={"email":"doctor@example.test","password":"Password123!"}
+2026-11-23 05:23:12,791 method=GET path=/api/staff/patients/PAT-DEMO-001 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
+2026-11-23 05:23:12,829 method=POST path=/api/auth/login query= authorization= body={"email":"patient02@example.test","password":"Password123!"}
+2026-11-23 05:23:12,842 method=DELETE path=/api/privacy/account query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDJAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MiwiZW1haWwiOiJwYXRpZW50MDJAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAyIn0._qZrDWvbQJ2H9rftSoqzGh5wMMHLNcg4ZFu7gq3m19U body=
+2026-11-23 05:23:12,860 method=GET path=/api/patients/me query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDJAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MiwiZW1haWwiOiJwYXRpZW50MDJAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAyIn0._qZrDWvbQJ2H9rftSoqzGh5wMMHLNcg4ZFu7gq3m19U body=
+2026-11-23 05:23:12,907 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
+2026-11-23 05:23:12,921 method=POST path=/api/privacy/rights-request query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body={"request_type":"export","details":"Full health summary export"}
+2026-11-23 05:23:12,936 method=POST path=/api/privacy/grievance query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body={"subject":"Data retention inquiry","description":"How long are diagnostic reports stored?","contact_email":"patient01@example.test"}
+2026-11-23 05:23:12,969 method=POST path=/api/auth/login query= authorization= body={"email":"privacy@example.test","password":"Password123!"}
+2026-11-23 05:23:12,983 method=GET path=/api/staff/audit-logs query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwcml2YWN5QGV4YW1wbGUudGVzdCIsInVzZXJfaWQiOjUsImVtYWlsIjoicHJpdmFjeUBleGFtcGxlLnRlc3QiLCJyb2xlIjoiYWRtaW5fZHBvIiwicGF0aWVudF9pZCI6IkFETS1ERU1PLTAwMSJ9.a9Af71xLE8jtDh3AGt1H25DrKbGrRrm_7LJuh80uJ3Q body=
+2026-11-23 05:23:13,002 method=GET path=/api/staff/security/incidents/1 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwcml2YWN5QGV4YW1wbGUudGVzdCIsInVzZXJfaWQiOjUsImVtYWlsIjoicHJpdmFjeUBleGFtcGxlLnRlc3QiLCJyb2xlIjoiYWRtaW5fZHBvIiwicGF0aWVudF9pZCI6IkFETS1ERU1PLTAwMSJ9.a9Af71xLE8jtDh3AGt1H25DrKbGrRrm_7LJuh80uJ3Q body=
+2026-11-23 05:23:13,040 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
+2026-11-23 05:23:13,054 method=POST path=/api/reports/upload query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=--d445a43cb8104a661aced1d3596441ac
 Content-Disposition: form-data; name="title"
 
 Comprehensive Blood Metabolic Panel
---a8d58ed16f6fda98ec10db6ea42a6bb1
+--d445a43cb8104a661aced1d3596441ac
 Content-Disposition: form-data; name="report_type"
 
 Lab Report
---a8d58ed16f6fda98ec10db6ea42a6bb1
+--d445a43cb8104a661aced1d3596441ac
 Content-Disposition: form-data; name="doctor_name"
 
 Dr. Ananya Rao
---a8d58ed16f6fda98ec10db6ea42a6bb1
+--d445a43cb8104a661aced1d3596441ac
 Content-Disposition: form-data; name="patient_id"
 
 PAT-DEMO-001
---a8d58ed16f6fda98ec10db6ea42a6bb1
+--d445a43cb8104a661aced1d3596441ac
 Content-Disposition: form-data; name="is_sensitive"
 
 false
---a8d58ed16f6fda98ec10db6ea42a6bb1
+--d445a43cb8104a661aced1d3596441ac
 Content-Disposition: form-data; name="file"; filename="lab_report_test.pdf"
 Content-Type: application/pdf
 
 %PDF-1.4 Synthetic Demonstration Report Content
---a8d58ed16f6fda98ec10db6ea42a6bb1--
+--d445a43cb8104a661aced1d3596441ac--
 
-2026-11-23 02:31:06,380 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:31:06,596 method=POST path=/api/reports/upload query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=--e4a620a580c5c0fd9a6a75a9faf6f5e3
+2026-11-23 05:23:13,093 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
+2026-11-23 05:23:13,106 method=POST path=/api/reports/upload query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=--85dc2b2a45a7411cb1e9f3f9f83c3066
 Content-Disposition: form-data; name="title"
 
 Spirometry Pulmonary Assessment
---e4a620a580c5c0fd9a6a75a9faf6f5e3
+--85dc2b2a45a7411cb1e9f3f9f83c3066
 Content-Disposition: form-data; name="report_type"
 
 Diagnostic Summary
---e4a620a580c5c0fd9a6a75a9faf6f5e3
+--85dc2b2a45a7411cb1e9f3f9f83c3066
 Content-Disposition: form-data; name="patient_id"
 
 PAT-DEMO-001
---e4a620a580c5c0fd9a6a75a9faf6f5e3
+--85dc2b2a45a7411cb1e9f3f9f83c3066
 Content-Disposition: form-data; name="file"; filename="spirometry_test.pdf"
 Content-Type: application/pdf
 
 Synthetic spirometry test
---e4a620a580c5c0fd9a6a75a9faf6f5e3--
+--85dc2b2a45a7411cb1e9f3f9f83c3066--
 
-2026-11-23 02:31:06,608 method=GET path=/api/reports query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:31:06,618 method=GET path=/api/reports/1 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:31:06,630 method=GET path=/api/reports/1/download query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:31:07,779 method=GET path=/api/reports query= authorization= body=
-2026-11-23 02:31:08,835 method=POST path=/api/auth/login query= authorization= body={"email":"reception@example.test","password":"Password123!"}
-2026-11-23 02:31:09,054 method=GET path=/api/staff/patients query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MywiZW1haWwiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2Jhc2ljIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMSJ9.EinFbnIbhdj-KRqpUA3dgrtdzRlK3UQLQAP8BYXgJSw body=
-2026-11-23 02:31:10,112 method=POST path=/api/auth/login query= authorization= body={"email":"doctor@example.test","password":"Password123!"}
-2026-11-23 02:31:10,323 method=GET path=/api/staff/patients query=search=Aarav authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 02:31:10,337 method=GET path=/api/staff/patients query=search=PAT-DEMO-002 authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 02:31:10,346 method=GET path=/api/staff/patients query=search=NonexistentNameXYZ authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 02:31:11,385 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:31:11,597 method=GET path=/api/staff/patients query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:31:12,655 method=GET path=/api/staff/patients query= authorization= body=
-2026-11-23 02:31:13,748 method=POST path=/api/auth/login query= authorization= body={"email":"reception@example.test","password":"Password123!"}
-2026-11-23 02:31:13,959 method=GET path=/api/staff/patients/PAT-DEMO-001 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MywiZW1haWwiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2Jhc2ljIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMSJ9.EinFbnIbhdj-KRqpUA3dgrtdzRlK3UQLQAP8BYXgJSw body=
-2026-11-23 02:31:14,996 method=POST path=/api/auth/login query= authorization= body={"email":"doctor@example.test","password":"Password123!"}
-2026-11-23 02:31:15,208 method=GET path=/api/staff/patients/PAT-UNKNOWN-999 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 02:31:16,241 method=POST path=/api/auth/login query= authorization= body={"email":"reception@example.test","password":"Password123!"}
-2026-11-23 02:31:16,452 method=GET path=/api/staff/patients/PAT-DEMO-002/clinical query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MywiZW1haWwiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2Jhc2ljIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMSJ9.EinFbnIbhdj-KRqpUA3dgrtdzRlK3UQLQAP8BYXgJSw body=
-2026-11-23 02:31:16,464 method=POST path=/api/auth/login query= authorization= body={"email":"doctor@example.test","password":"Password123!"}
-2026-11-23 02:31:16,678 method=GET path=/api/staff/patients/PAT-DEMO-002/clinical query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 02:38:16,526 method=POST path=/api/auth/login query= authorization= body={"email":"patient02@medivault.test","password":"Password123!"}
-2026-11-23 02:38:16,762 method=DELETE path=/api/privacy/account query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDJAbWVkaXZhdWx0LnRlc3QiLCJ1c2VyX2lkIjoyLCJlbWFpbCI6InBhdGllbnQwMkBtZWRpdmF1bHQudGVzdCIsInJvbGUiOiJwYXRpZW50IiwicGF0aWVudF9pZCI6IlBBVC0xMDAwMDIifQ.Cf0Vg2qy9VQyVXsxiu3g0Yz-Ve2x4G3X38fNAabekU4 body=
-2026-11-23 02:38:16,793 method=GET path=/api/patients/me query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDJAbWVkaXZhdWx0LnRlc3QiLCJ1c2VyX2lkIjoyLCJlbWFpbCI6InBhdGllbnQwMkBtZWRpdmF1bHQudGVzdCIsInJvbGUiOiJwYXRpZW50IiwicGF0aWVudF9pZCI6IlBBVC0xMDAwMDIifQ.Cf0Vg2qy9VQyVXsxiu3g0Yz-Ve2x4G3X38fNAabekU4 body=
-2026-11-23 02:38:40,649 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:38:41,896 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"WrongPassword!"}
-2026-11-23 02:38:43,156 method=POST path=/api/auth/register query= authorization= body={"email":"new_patient@example.test","password":"SecurePassword123!","full_name":"Meera Nambiar","role":"patient","date_of_birth":"1992-04-12","gender":"Female","phone":"+91-98765-00000","emergency_contact":"Father (+91-98765-00001)"}
-2026-11-23 02:38:44,388 method=POST path=/api/auth/register query= authorization= body={"email":"patient01@example.test","password":"Password123!","full_name":"Duplicate User"}
-2026-11-23 02:38:45,409 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:38:45,618 method=GET path=/api/auth/me query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:38:46,654 method=GET path=/api/auth/me query= authorization= body=
-2026-11-23 02:38:47,682 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:38:47,892 method=GET path=/api/patients/me query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:38:48,943 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:38:49,154 method=GET path=/api/patients/PAT-DEMO-002 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:38:50,182 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:38:50,394 method=GET path=/api/patients/PAT-UNKNOWN-999 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:38:51,507 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:38:51,719 method=PUT path=/api/patients/PAT-DEMO-001 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body={"allergies":"Penicillin, Latex, Pollen","medications":"Metformin 500mg, Lisinopril 10mg","emergency_contact":"Sunita Sharma (+91-98765-43219)","blood_group":"B+"}
-2026-11-23 02:38:52,764 method=GET path=/api/patients/me query= authorization= body=
-2026-11-23 02:38:53,799 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:38:54,012 method=GET path=/api/patients/PAT-DEMO-002 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:38:54,023 method=GET path=/api/patients/PAT-DEMO-002/reports query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:38:55,081 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:38:55,300 method=GET path=/api/patients/me query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:38:56,387 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:38:56,616 method=GET path=/api/privacy/consent query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:38:56,645 method=POST path=/api/privacy/consent query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body={"purpose":"third_party_sharing","is_granted":true}
-2026-11-23 02:38:57,794 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:38:58,030 method=POST path=/api/privacy/rights-request query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body={"request_type":"export","details":"Full health summary and diagnostic records"}
-2026-11-23 02:38:59,114 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:38:59,336 method=POST path=/api/privacy/grievance query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body={"subject":"Inquiry regarding data processing policy","description":"Requesting confirmation on retention period for inactive profile.","contact_email":"patient01@example.test"}
-2026-11-23 02:39:00,425 method=GET path=/api/privacy/consent query= authorization= body=
-2026-11-23 02:39:00,433 method=POST path=/api/privacy/rights-request query= authorization= body={"request_type":"export"}
-2026-11-23 02:39:01,500 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:39:01,722 method=DELETE path=/api/privacy/account query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:39:03,361 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:39:03,601 method=POST path=/api/reports/upload query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=--7a7bb519068801491ede66357452f61f
-Content-Disposition: form-data; name="title"
-
-Comprehensive Blood Metabolic Panel
---7a7bb519068801491ede66357452f61f
-Content-Disposition: form-data; name="report_type"
-
-Lab Report
---7a7bb519068801491ede66357452f61f
-Content-Disposition: form-data; name="doctor_name"
-
-Dr. Ananya Rao
---7a7bb519068801491ede66357452f61f
-Content-Disposition: form-data; name="patient_id"
-
-PAT-DEMO-001
---7a7bb519068801491ede66357452f61f
-Content-Disposition: form-data; name="is_sensitive"
-
-false
---7a7bb519068801491ede66357452f61f
-Content-Disposition: form-data; name="file"; filename="lab_report_test.pdf"
-Content-Type: application/pdf
-
-%PDF-1.4 Synthetic Demonstration Report Content
---7a7bb519068801491ede66357452f61f--
-
-2026-11-23 02:39:04,725 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:39:04,950 method=POST path=/api/reports/upload query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=--b674205c6ebe7386b284e73cebe76cbd
-Content-Disposition: form-data; name="title"
-
-Spirometry Pulmonary Assessment
---b674205c6ebe7386b284e73cebe76cbd
-Content-Disposition: form-data; name="report_type"
-
-Diagnostic Summary
---b674205c6ebe7386b284e73cebe76cbd
-Content-Disposition: form-data; name="patient_id"
-
-PAT-DEMO-001
---b674205c6ebe7386b284e73cebe76cbd
-Content-Disposition: form-data; name="file"; filename="spirometry_test.pdf"
-Content-Type: application/pdf
-
-Synthetic spirometry test
---b674205c6ebe7386b284e73cebe76cbd--
-
-2026-11-23 02:39:04,967 method=GET path=/api/reports query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:39:04,982 method=GET path=/api/reports/1 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:39:04,998 method=GET path=/api/reports/1/download query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:39:06,205 method=GET path=/api/reports query= authorization= body=
-2026-11-23 02:39:07,312 method=POST path=/api/auth/login query= authorization= body={"email":"reception@example.test","password":"Password123!"}
-2026-11-23 02:39:07,535 method=GET path=/api/staff/patients query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MywiZW1haWwiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2Jhc2ljIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMSJ9.EinFbnIbhdj-KRqpUA3dgrtdzRlK3UQLQAP8BYXgJSw body=
-2026-11-23 02:39:08,641 method=POST path=/api/auth/login query= authorization= body={"email":"doctor@example.test","password":"Password123!"}
-2026-11-23 02:39:08,857 method=GET path=/api/staff/patients query=search=Aarav authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 02:39:08,872 method=GET path=/api/staff/patients query=search=PAT-DEMO-002 authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 02:39:08,883 method=GET path=/api/staff/patients query=search=NonexistentNameXYZ authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 02:39:09,946 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:39:10,179 method=GET path=/api/staff/patients query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:39:11,649 method=GET path=/api/staff/patients query= authorization= body=
-2026-11-23 02:39:13,493 method=POST path=/api/auth/login query= authorization= body={"email":"reception@example.test","password":"Password123!"}
-2026-11-23 02:39:13,852 method=GET path=/api/staff/patients/PAT-DEMO-001 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MywiZW1haWwiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2Jhc2ljIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMSJ9.EinFbnIbhdj-KRqpUA3dgrtdzRlK3UQLQAP8BYXgJSw body=
-2026-11-23 02:39:15,711 method=POST path=/api/auth/login query= authorization= body={"email":"doctor@example.test","password":"Password123!"}
-2026-11-23 02:39:16,098 method=GET path=/api/staff/patients/PAT-UNKNOWN-999 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 02:39:18,144 method=POST path=/api/auth/login query= authorization= body={"email":"reception@example.test","password":"Password123!"}
-2026-11-23 02:39:18,523 method=GET path=/api/staff/patients/PAT-DEMO-002/clinical query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MywiZW1haWwiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2Jhc2ljIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMSJ9.EinFbnIbhdj-KRqpUA3dgrtdzRlK3UQLQAP8BYXgJSw body=
-2026-11-23 02:39:18,539 method=POST path=/api/auth/login query= authorization= body={"email":"doctor@example.test","password":"Password123!"}
-2026-11-23 02:39:18,907 method=GET path=/api/staff/patients/PAT-DEMO-002/clinical query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 02:40:02,308 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:40:03,691 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"WrongPassword!"}
-2026-11-23 02:40:04,935 method=POST path=/api/auth/register query= authorization= body={"email":"new_patient@example.test","password":"SecurePassword123!","full_name":"Meera Nambiar","role":"patient","date_of_birth":"1992-04-12","gender":"Female","phone":"+91-98765-00000","emergency_contact":"Father (+91-98765-00001)"}
-2026-11-23 02:40:06,174 method=POST path=/api/auth/register query= authorization= body={"email":"patient01@example.test","password":"Password123!","full_name":"Duplicate User"}
-2026-11-23 02:40:07,218 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:40:07,432 method=GET path=/api/auth/me query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:40:08,488 method=GET path=/api/auth/me query= authorization= body=
-2026-11-23 02:40:09,526 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:40:09,744 method=GET path=/api/patients/me query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:40:10,793 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:40:11,003 method=GET path=/api/patients/PAT-DEMO-002 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:40:12,062 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:40:12,281 method=GET path=/api/patients/PAT-UNKNOWN-999 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:40:13,329 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:40:13,543 method=PUT path=/api/patients/PAT-DEMO-001 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body={"allergies":"Penicillin, Latex, Pollen","medications":"Metformin 500mg, Lisinopril 10mg","emergency_contact":"Sunita Sharma (+91-98765-43219)","blood_group":"B+"}
-2026-11-23 02:40:13,967 method=GET path=/ query= authorization= body=
-2026-11-23 02:40:14,067 method=GET path=/favicon.ico query= authorization= body=
-2026-11-23 02:40:15,162 method=GET path=/api/patients/me query= authorization= body=
-2026-11-23 02:40:17,052 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:40:17,439 method=GET path=/api/patients/PAT-DEMO-002 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:40:17,454 method=GET path=/api/patients/PAT-DEMO-002/reports query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:40:19,185 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:40:19,417 method=GET path=/api/patients/me query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:40:20,479 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:40:20,695 method=GET path=/api/privacy/consent query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:40:20,720 method=POST path=/api/privacy/consent query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body={"purpose":"third_party_sharing","is_granted":true}
-2026-11-23 02:40:21,780 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:40:21,993 method=POST path=/api/privacy/rights-request query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body={"request_type":"export","details":"Full health summary and diagnostic records"}
-2026-11-23 02:40:23,044 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:40:23,343 method=POST path=/api/privacy/grievance query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body={"subject":"Inquiry regarding data processing policy","description":"Requesting confirmation on retention period for inactive profile.","contact_email":"patient01@example.test"}
-2026-11-23 02:40:24,465 method=GET path=/api/privacy/consent query= authorization= body=
-2026-11-23 02:40:24,479 method=POST path=/api/privacy/rights-request query= authorization= body={"request_type":"export"}
-2026-11-23 02:40:25,572 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:40:25,798 method=DELETE path=/api/privacy/account query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:40:25,814 method=GET path=/api/patients/me query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:40:25,825 method=POST path=/api/auth/login query= authorization= body={"email":"doctor@example.test","password":"Password123!"}
-2026-11-23 02:40:26,038 method=GET path=/api/staff/patients/PAT-DEMO-001 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 02:40:27,109 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:40:27,372 method=POST path=/api/reports/upload query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=--749aa864b329186e982d2cbb6356cb28
-Content-Disposition: form-data; name="title"
-
-Comprehensive Blood Metabolic Panel
---749aa864b329186e982d2cbb6356cb28
-Content-Disposition: form-data; name="report_type"
-
-Lab Report
---749aa864b329186e982d2cbb6356cb28
-Content-Disposition: form-data; name="doctor_name"
-
-Dr. Ananya Rao
---749aa864b329186e982d2cbb6356cb28
-Content-Disposition: form-data; name="patient_id"
-
-PAT-DEMO-001
---749aa864b329186e982d2cbb6356cb28
-Content-Disposition: form-data; name="is_sensitive"
-
-false
---749aa864b329186e982d2cbb6356cb28
-Content-Disposition: form-data; name="file"; filename="lab_report_test.pdf"
-Content-Type: application/pdf
-
-%PDF-1.4 Synthetic Demonstration Report Content
---749aa864b329186e982d2cbb6356cb28--
-
-2026-11-23 02:40:28,425 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:40:28,639 method=POST path=/api/reports/upload query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=--ec7043df843541bf3f5351c1fb94a303
-Content-Disposition: form-data; name="title"
-
-Spirometry Pulmonary Assessment
---ec7043df843541bf3f5351c1fb94a303
-Content-Disposition: form-data; name="report_type"
-
-Diagnostic Summary
---ec7043df843541bf3f5351c1fb94a303
-Content-Disposition: form-data; name="patient_id"
-
-PAT-DEMO-001
---ec7043df843541bf3f5351c1fb94a303
-Content-Disposition: form-data; name="file"; filename="spirometry_test.pdf"
-Content-Type: application/pdf
-
-Synthetic spirometry test
---ec7043df843541bf3f5351c1fb94a303--
-
-2026-11-23 02:40:28,652 method=GET path=/api/reports query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:40:28,662 method=GET path=/api/reports/1 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:40:28,672 method=GET path=/api/reports/1/download query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:40:29,737 method=GET path=/api/reports query= authorization= body=
-2026-11-23 02:40:30,819 method=POST path=/api/auth/login query= authorization= body={"email":"reception@example.test","password":"Password123!"}
-2026-11-23 02:40:31,052 method=GET path=/api/staff/patients query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MywiZW1haWwiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2Jhc2ljIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMSJ9.EinFbnIbhdj-KRqpUA3dgrtdzRlK3UQLQAP8BYXgJSw body=
-2026-11-23 02:40:32,100 method=POST path=/api/auth/login query= authorization= body={"email":"doctor@example.test","password":"Password123!"}
-2026-11-23 02:40:32,315 method=GET path=/api/staff/patients query=search=Aarav authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 02:40:32,327 method=GET path=/api/staff/patients query=search=PAT-DEMO-002 authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 02:40:32,338 method=GET path=/api/staff/patients query=search=NonexistentNameXYZ authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 02:40:33,377 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:40:33,591 method=GET path=/api/staff/patients query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:40:34,792 method=GET path=/api/staff/patients query= authorization= body=
-2026-11-23 02:40:35,992 method=POST path=/api/auth/login query= authorization= body={"email":"reception@example.test","password":"Password123!"}
-2026-11-23 02:40:36,305 method=GET path=/api/staff/patients/PAT-DEMO-001 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MywiZW1haWwiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2Jhc2ljIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMSJ9.EinFbnIbhdj-KRqpUA3dgrtdzRlK3UQLQAP8BYXgJSw body=
-2026-11-23 02:40:37,400 method=POST path=/api/auth/login query= authorization= body={"email":"doctor@example.test","password":"Password123!"}
-2026-11-23 02:40:37,625 method=GET path=/api/staff/patients/PAT-UNKNOWN-999 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 02:40:38,859 method=POST path=/api/auth/login query= authorization= body={"email":"reception@example.test","password":"Password123!"}
-2026-11-23 02:40:39,075 method=GET path=/api/staff/patients/PAT-DEMO-002/clinical query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MywiZW1haWwiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2Jhc2ljIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMSJ9.EinFbnIbhdj-KRqpUA3dgrtdzRlK3UQLQAP8BYXgJSw body=
-2026-11-23 02:40:39,087 method=POST path=/api/auth/login query= authorization= body={"email":"doctor@example.test","password":"Password123!"}
-2026-11-23 02:40:39,384 method=GET path=/api/staff/patients/PAT-DEMO-002/clinical query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 02:40:49,341 method=GET path=/api/reports query= authorization= body=
-2026-11-23 02:40:49,358 method=GET path=/api/reports query= authorization= body=
-2026-11-23 02:45:39,837 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:45:41,086 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"WrongPassword!"}
-2026-11-23 02:45:42,319 method=POST path=/api/auth/register query= authorization= body={"email":"new_patient@example.test","password":"SecurePassword123!","full_name":"Meera Nambiar","role":"patient","date_of_birth":"1992-04-12","gender":"Female","phone":"+91-98765-00000","emergency_contact":"Father (+91-98765-00001)"}
-2026-11-23 02:45:43,553 method=POST path=/api/auth/register query= authorization= body={"email":"patient01@example.test","password":"Password123!","full_name":"Duplicate User"}
-2026-11-23 02:45:44,581 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:45:44,793 method=GET path=/api/auth/me query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:45:45,863 method=GET path=/api/auth/me query= authorization= body=
-2026-11-23 02:45:46,895 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:45:47,105 method=GET path=/api/patients/me query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:45:48,149 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:45:48,360 method=GET path=/api/patients/PAT-DEMO-002 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:45:49,445 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:45:49,660 method=GET path=/api/patients/PAT-UNKNOWN-999 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:45:50,691 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:45:50,900 method=PUT path=/api/patients/PAT-DEMO-001 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body={"allergies":"Penicillin, Latex, Pollen","medications":"Metformin 500mg, Lisinopril 10mg","emergency_contact":"Sunita Sharma (+91-98765-43219)","blood_group":"B+"}
-2026-11-23 02:45:51,940 method=GET path=/api/patients/me query= authorization= body=
-2026-11-23 02:45:52,989 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:45:53,199 method=GET path=/api/patients/PAT-DEMO-002 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:45:53,210 method=GET path=/api/patients/PAT-DEMO-002/reports query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:45:54,244 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:45:54,455 method=GET path=/api/patients/me query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:45:55,492 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:45:55,707 method=GET path=/api/privacy/consent query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:45:55,725 method=POST path=/api/privacy/consent query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body={"purpose":"third_party_sharing","is_granted":true}
-2026-11-23 02:45:56,810 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:45:57,023 method=POST path=/api/privacy/rights-request query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body={"request_type":"export","details":"Full health summary and diagnostic records"}
-2026-11-23 02:45:58,049 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:45:58,261 method=POST path=/api/privacy/grievance query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body={"subject":"Inquiry regarding data processing policy","description":"Requesting confirmation on retention period for inactive profile.","contact_email":"patient01@example.test"}
-2026-11-23 02:45:59,311 method=GET path=/api/privacy/consent query= authorization= body=
-2026-11-23 02:45:59,319 method=POST path=/api/privacy/rights-request query= authorization= body={"request_type":"export"}
-2026-11-23 02:46:00,346 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:46:00,556 method=DELETE path=/api/privacy/account query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:46:00,569 method=GET path=/api/patients/me query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:46:00,577 method=POST path=/api/auth/login query= authorization= body={"email":"doctor@example.test","password":"Password123!"}
-2026-11-23 02:46:00,788 method=GET path=/api/staff/patients/PAT-DEMO-001 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 02:46:01,829 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:46:02,041 method=POST path=/api/reports/upload query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=--4991c9348b66feda6fdbaa8d0e91b566
-Content-Disposition: form-data; name="title"
-
-Comprehensive Blood Metabolic Panel
---4991c9348b66feda6fdbaa8d0e91b566
-Content-Disposition: form-data; name="report_type"
-
-Lab Report
---4991c9348b66feda6fdbaa8d0e91b566
-Content-Disposition: form-data; name="doctor_name"
-
-Dr. Ananya Rao
---4991c9348b66feda6fdbaa8d0e91b566
-Content-Disposition: form-data; name="patient_id"
-
-PAT-DEMO-001
---4991c9348b66feda6fdbaa8d0e91b566
-Content-Disposition: form-data; name="is_sensitive"
-
-false
---4991c9348b66feda6fdbaa8d0e91b566
-Content-Disposition: form-data; name="file"; filename="lab_report_test.pdf"
-Content-Type: application/pdf
-
-%PDF-1.4 Synthetic Demonstration Report Content
---4991c9348b66feda6fdbaa8d0e91b566--
-
-2026-11-23 02:46:03,082 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:46:03,291 method=POST path=/api/reports/upload query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=--39f7a7c079a505e37cd9eeab5e9530d9
-Content-Disposition: form-data; name="title"
-
-Spirometry Pulmonary Assessment
---39f7a7c079a505e37cd9eeab5e9530d9
-Content-Disposition: form-data; name="report_type"
-
-Diagnostic Summary
---39f7a7c079a505e37cd9eeab5e9530d9
-Content-Disposition: form-data; name="patient_id"
-
-PAT-DEMO-001
---39f7a7c079a505e37cd9eeab5e9530d9
-Content-Disposition: form-data; name="file"; filename="spirometry_test.pdf"
-Content-Type: application/pdf
-
-Synthetic spirometry test
---39f7a7c079a505e37cd9eeab5e9530d9--
-
-2026-11-23 02:46:03,303 method=GET path=/api/reports query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:46:03,313 method=GET path=/api/reports/1 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:46:03,325 method=GET path=/api/reports/1/download query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:46:04,397 method=GET path=/api/reports query= authorization= body=
-2026-11-23 02:46:05,495 method=POST path=/api/auth/login query= authorization= body={"email":"reception@example.test","password":"Password123!"}
-2026-11-23 02:46:05,705 method=GET path=/api/staff/patients query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MywiZW1haWwiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2Jhc2ljIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMSJ9.EinFbnIbhdj-KRqpUA3dgrtdzRlK3UQLQAP8BYXgJSw body=
-2026-11-23 02:46:06,748 method=POST path=/api/auth/login query= authorization= body={"email":"doctor@example.test","password":"Password123!"}
-2026-11-23 02:46:06,961 method=GET path=/api/staff/patients query=search=Aarav authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 02:46:06,975 method=GET path=/api/staff/patients query=search=PAT-DEMO-002 authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 02:46:06,984 method=GET path=/api/staff/patients query=search=NonexistentNameXYZ authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 02:46:08,027 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:46:08,251 method=GET path=/api/staff/patients query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:46:09,288 method=GET path=/api/staff/patients query= authorization= body=
-2026-11-23 02:46:10,318 method=POST path=/api/auth/login query= authorization= body={"email":"reception@example.test","password":"Password123!"}
-2026-11-23 02:46:10,527 method=GET path=/api/staff/patients/PAT-DEMO-001 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MywiZW1haWwiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2Jhc2ljIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMSJ9.EinFbnIbhdj-KRqpUA3dgrtdzRlK3UQLQAP8BYXgJSw body=
-2026-11-23 02:46:11,596 method=POST path=/api/auth/login query= authorization= body={"email":"doctor@example.test","password":"Password123!"}
-2026-11-23 02:46:11,870 method=GET path=/api/staff/patients/PAT-UNKNOWN-999 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 02:46:12,911 method=POST path=/api/auth/login query= authorization= body={"email":"reception@example.test","password":"Password123!"}
-2026-11-23 02:46:13,121 method=GET path=/api/staff/patients/PAT-DEMO-002/clinical query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MywiZW1haWwiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2Jhc2ljIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMSJ9.EinFbnIbhdj-KRqpUA3dgrtdzRlK3UQLQAP8BYXgJSw body=
-2026-11-23 02:46:13,133 method=POST path=/api/auth/login query= authorization= body={"email":"doctor@example.test","password":"Password123!"}
-2026-11-23 02:46:13,349 method=GET path=/api/staff/patients/PAT-DEMO-002/clinical query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 02:50:03,763 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@medivault.test","password":"Password123!"}
-2026-11-23 02:50:03,996 method=POST path=/api/privacy/rights-request query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAbWVkaXZhdWx0LnRlc3QiLCJ1c2VyX2lkIjoxLCJlbWFpbCI6InBhdGllbnQwMUBtZWRpdmF1bHQudGVzdCIsInJvbGUiOiJwYXRpZW50IiwicGF0aWVudF9pZCI6IlBBVC0xMDAwMDEifQ.xlvIi1LPEaoYLeeNzmzatsvux54XUHQCPIGvPy69-lY body={"request_type":"export","details":"Full health summary and diagnostic documents"}
-2026-11-23 02:50:04,021 method=POST path=/api/privacy/rights-request query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAbWVkaXZhdWx0LnRlc3QiLCJ1c2VyX2lkIjoxLCJlbWFpbCI6InBhdGllbnQwMUBtZWRpdmF1bHQudGVzdCIsInJvbGUiOiJwYXRpZW50IiwicGF0aWVudF9pZCI6IlBBVC0xMDAwMDEifQ.xlvIi1LPEaoYLeeNzmzatsvux54XUHQCPIGvPy69-lY body={"request_type":"correction","details":"Update emergency contact number"}
-2026-11-23 02:50:04,036 method=POST path=/api/privacy/grievance query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAbWVkaXZhdWx0LnRlc3QiLCJ1c2VyX2lkIjoxLCJlbWFpbCI6InBhdGllbnQwMUBtZWRpdmF1bHQudGVzdCIsInJvbGUiOiJwYXRpZW50IiwicGF0aWVudF9pZCI6IlBBVC0xMDAwMDEifQ.xlvIi1LPEaoYLeeNzmzatsvux54XUHQCPIGvPy69-lY body={"subject":"Inquiry regarding health data retention period","description":"Requesting clarification on how long diagnostic files are stored.","contact_email":"patient01@medivault.test"}
-2026-11-23 02:51:03,004 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:51:04,265 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"WrongPassword!"}
-2026-11-23 02:51:05,496 method=POST path=/api/auth/register query= authorization= body={"email":"new_patient@example.test","password":"SecurePassword123!","full_name":"Meera Nambiar","role":"patient","date_of_birth":"1992-04-12","gender":"Female","phone":"+91-98765-00000","emergency_contact":"Father (+91-98765-00001)"}
-2026-11-23 02:51:06,730 method=POST path=/api/auth/register query= authorization= body={"email":"patient01@example.test","password":"Password123!","full_name":"Duplicate User"}
-2026-11-23 02:51:07,758 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:51:07,968 method=GET path=/api/auth/me query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:51:09,004 method=GET path=/api/auth/me query= authorization= body=
-2026-11-23 02:51:10,039 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:51:10,249 method=GET path=/api/patients/me query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:51:11,286 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:51:11,497 method=GET path=/api/patients/PAT-DEMO-002 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:51:12,553 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:51:12,767 method=GET path=/api/patients/PAT-UNKNOWN-999 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:51:13,817 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:51:14,031 method=PUT path=/api/patients/PAT-DEMO-001 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body={"allergies":"Penicillin, Latex, Pollen","medications":"Metformin 500mg, Lisinopril 10mg","emergency_contact":"Sunita Sharma (+91-98765-43219)","blood_group":"B+"}
-2026-11-23 02:51:15,066 method=GET path=/api/patients/me query= authorization= body=
-2026-11-23 02:51:16,135 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:51:16,346 method=GET path=/api/patients/PAT-DEMO-002 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:51:16,357 method=GET path=/api/patients/PAT-DEMO-002/reports query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:51:17,387 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:51:17,599 method=GET path=/api/patients/me query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:51:18,632 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:51:18,842 method=GET path=/api/privacy/consent query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:51:18,860 method=POST path=/api/privacy/consent query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body={"purpose":"third_party_sharing","is_granted":true}
-2026-11-23 02:51:19,906 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:51:20,135 method=POST path=/api/privacy/rights-request query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body={"request_type":"export","details":"Full health summary and diagnostic records"}
-2026-11-23 02:51:21,212 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:51:21,427 method=POST path=/api/privacy/grievance query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body={"subject":"Inquiry regarding data processing policy","description":"Requesting confirmation on retention period for inactive profile.","contact_email":"patient01@example.test"}
-2026-11-23 02:51:22,460 method=GET path=/api/privacy/consent query= authorization= body=
-2026-11-23 02:51:22,468 method=POST path=/api/privacy/rights-request query= authorization= body={"request_type":"export"}
-2026-11-23 02:51:23,502 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:51:23,722 method=DELETE path=/api/privacy/account query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:51:23,744 method=GET path=/api/patients/me query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:51:23,758 method=POST path=/api/auth/login query= authorization= body={"email":"doctor@example.test","password":"Password123!"}
-2026-11-23 02:51:23,978 method=GET path=/api/staff/patients/PAT-DEMO-001 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 02:51:25,020 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:51:25,233 method=POST path=/api/reports/upload query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=--1e0b4d1df3f39f565257715e23f753d3
-Content-Disposition: form-data; name="title"
-
-Comprehensive Blood Metabolic Panel
---1e0b4d1df3f39f565257715e23f753d3
-Content-Disposition: form-data; name="report_type"
-
-Lab Report
---1e0b4d1df3f39f565257715e23f753d3
-Content-Disposition: form-data; name="doctor_name"
-
-Dr. Ananya Rao
---1e0b4d1df3f39f565257715e23f753d3
-Content-Disposition: form-data; name="patient_id"
-
-PAT-DEMO-001
---1e0b4d1df3f39f565257715e23f753d3
-Content-Disposition: form-data; name="is_sensitive"
-
-false
---1e0b4d1df3f39f565257715e23f753d3
-Content-Disposition: form-data; name="file"; filename="lab_report_test.pdf"
-Content-Type: application/pdf
-
-%PDF-1.4 Synthetic Demonstration Report Content
---1e0b4d1df3f39f565257715e23f753d3--
-
-2026-11-23 02:51:26,284 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:51:26,498 method=POST path=/api/reports/upload query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=--5c4101cfadd2d12ceb19af95451d5d53
-Content-Disposition: form-data; name="title"
-
-Spirometry Pulmonary Assessment
---5c4101cfadd2d12ceb19af95451d5d53
-Content-Disposition: form-data; name="report_type"
-
-Diagnostic Summary
---5c4101cfadd2d12ceb19af95451d5d53
-Content-Disposition: form-data; name="patient_id"
-
-PAT-DEMO-001
---5c4101cfadd2d12ceb19af95451d5d53
-Content-Disposition: form-data; name="file"; filename="spirometry_test.pdf"
-Content-Type: application/pdf
-
-Synthetic spirometry test
---5c4101cfadd2d12ceb19af95451d5d53--
-
-2026-11-23 02:51:26,510 method=GET path=/api/reports query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:51:26,520 method=GET path=/api/reports/1 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:51:26,533 method=GET path=/api/reports/1/download query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:51:27,581 method=GET path=/api/reports query= authorization= body=
-2026-11-23 02:51:28,751 method=POST path=/api/auth/login query= authorization= body={"email":"reception@example.test","password":"Password123!"}
-2026-11-23 02:51:28,967 method=GET path=/api/staff/patients query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MywiZW1haWwiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2Jhc2ljIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMSJ9.EinFbnIbhdj-KRqpUA3dgrtdzRlK3UQLQAP8BYXgJSw body=
-2026-11-23 02:51:30,025 method=POST path=/api/auth/login query= authorization= body={"email":"doctor@example.test","password":"Password123!"}
-2026-11-23 02:51:30,236 method=GET path=/api/staff/patients query=search=Aarav authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 02:51:30,247 method=GET path=/api/staff/patients query=search=PAT-DEMO-002 authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 02:51:30,258 method=GET path=/api/staff/patients query=search=NonexistentNameXYZ authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 02:51:31,323 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:51:31,538 method=GET path=/api/staff/patients query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:51:32,606 method=GET path=/api/staff/patients query= authorization= body=
-2026-11-23 02:51:33,641 method=POST path=/api/auth/login query= authorization= body={"email":"reception@example.test","password":"Password123!"}
-2026-11-23 02:51:33,851 method=GET path=/api/staff/patients/PAT-DEMO-001 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MywiZW1haWwiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2Jhc2ljIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMSJ9.EinFbnIbhdj-KRqpUA3dgrtdzRlK3UQLQAP8BYXgJSw body=
-2026-11-23 02:51:34,896 method=POST path=/api/auth/login query= authorization= body={"email":"doctor@example.test","password":"Password123!"}
-2026-11-23 02:51:35,114 method=GET path=/api/staff/patients/PAT-UNKNOWN-999 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 02:51:36,149 method=POST path=/api/auth/login query= authorization= body={"email":"reception@example.test","password":"Password123!"}
-2026-11-23 02:51:36,360 method=GET path=/api/staff/patients/PAT-DEMO-002/clinical query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MywiZW1haWwiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2Jhc2ljIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMSJ9.EinFbnIbhdj-KRqpUA3dgrtdzRlK3UQLQAP8BYXgJSw body=
-2026-11-23 02:51:36,372 method=POST path=/api/auth/login query= authorization= body={"email":"doctor@example.test","password":"Password123!"}
-2026-11-23 02:51:36,582 method=GET path=/api/staff/patients/PAT-DEMO-002/clinical query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 02:57:09,159 method=POST path=/api/auth/register query= authorization= body={"email":"TABdan_tabdan@gmail.com","password":"TusharTabahi","full_name":"Gaurav Khan","role":"patient","phone":"6969696969","gender":"Male"}
-2026-11-23 02:57:35,502 method=GET path=/api/privacy/consent query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0YWJkYW5fdGFiZGFuQGdtYWlsLmNvbSIsInVzZXJfaWQiOjYsImVtYWlsIjoidGFiZGFuX3RhYmRhbkBnbWFpbC5jb20iLCJyb2xlIjoicGF0aWVudCIsInBhdGllbnRfaWQiOiJQQVQtNTNDMkU2RDUifQ.5JeagPad8QXmSC_AAA6ltv4uUTdK8yOIOBnmRO2sbBI body=
-2026-11-23 02:57:35,556 method=GET path=/api/privacy/consent query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0YWJkYW5fdGFiZGFuQGdtYWlsLmNvbSIsInVzZXJfaWQiOjYsImVtYWlsIjoidGFiZGFuX3RhYmRhbkBnbWFpbC5jb20iLCJyb2xlIjoicGF0aWVudCIsInBhdGllbnRfaWQiOiJQQVQtNTNDMkU2RDUifQ.5JeagPad8QXmSC_AAA6ltv4uUTdK8yOIOBnmRO2sbBI body=
-2026-11-23 02:57:36,467 method=GET path=/api/reports query=patient_id=PAT-53C2E6D5 authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0YWJkYW5fdGFiZGFuQGdtYWlsLmNvbSIsInVzZXJfaWQiOjYsImVtYWlsIjoidGFiZGFuX3RhYmRhbkBnbWFpbC5jb20iLCJyb2xlIjoicGF0aWVudCIsInBhdGllbnRfaWQiOiJQQVQtNTNDMkU2RDUifQ.5JeagPad8QXmSC_AAA6ltv4uUTdK8yOIOBnmRO2sbBI body=
-2026-11-23 02:57:36,546 method=GET path=/api/reports query=patient_id=PAT-53C2E6D5 authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0YWJkYW5fdGFiZGFuQGdtYWlsLmNvbSIsInVzZXJfaWQiOjYsImVtYWlsIjoidGFiZGFuX3RhYmRhbkBnbWFpbC5jb20iLCJyb2xlIjoicGF0aWVudCIsInBhdGllbnRfaWQiOiJQQVQtNTNDMkU2RDUifQ.5JeagPad8QXmSC_AAA6ltv4uUTdK8yOIOBnmRO2sbBI body=
-2026-11-23 02:57:37,337 method=GET path=/api/patients/me query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0YWJkYW5fdGFiZGFuQGdtYWlsLmNvbSIsInVzZXJfaWQiOjYsImVtYWlsIjoidGFiZGFuX3RhYmRhbkBnbWFpbC5jb20iLCJyb2xlIjoicGF0aWVudCIsInBhdGllbnRfaWQiOiJQQVQtNTNDMkU2RDUifQ.5JeagPad8QXmSC_AAA6ltv4uUTdK8yOIOBnmRO2sbBI body=
-2026-11-23 02:57:37,357 method=GET path=/api/patients/me query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0YWJkYW5fdGFiZGFuQGdtYWlsLmNvbSIsInVzZXJfaWQiOjYsImVtYWlsIjoidGFiZGFuX3RhYmRhbkBnbWFpbC5jb20iLCJyb2xlIjoicGF0aWVudCIsInBhdGllbnRfaWQiOiJQQVQtNTNDMkU2RDUifQ.5JeagPad8QXmSC_AAA6ltv4uUTdK8yOIOBnmRO2sbBI body=
-2026-11-23 02:57:39,886 method=GET path=/api/patients/me query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0YWJkYW5fdGFiZGFuQGdtYWlsLmNvbSIsInVzZXJfaWQiOjYsImVtYWlsIjoidGFiZGFuX3RhYmRhbkBnbWFpbC5jb20iLCJyb2xlIjoicGF0aWVudCIsInBhdGllbnRfaWQiOiJQQVQtNTNDMkU2RDUifQ.5JeagPad8QXmSC_AAA6ltv4uUTdK8yOIOBnmRO2sbBI body=
-2026-11-23 02:57:39,900 method=GET path=/api/patients/me query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0YWJkYW5fdGFiZGFuQGdtYWlsLmNvbSIsInVzZXJfaWQiOjYsImVtYWlsIjoidGFiZGFuX3RhYmRhbkBnbWFpbC5jb20iLCJyb2xlIjoicGF0aWVudCIsInBhdGllbnRfaWQiOiJQQVQtNTNDMkU2RDUifQ.5JeagPad8QXmSC_AAA6ltv4uUTdK8yOIOBnmRO2sbBI body=
-2026-11-23 02:58:33,194 method=POST path=/api/auth/login query= authorization= body={"email":"privacy@medivault.test","password":"Password123!"}
-2026-11-23 02:58:33,427 method=GET path=/api/staff/audit-logs query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwcml2YWN5QG1lZGl2YXVsdC50ZXN0IiwidXNlcl9pZCI6NSwiZW1haWwiOiJwcml2YWN5QG1lZGl2YXVsdC50ZXN0Iiwicm9sZSI6ImFkbWluX2RwbyIsInBhdGllbnRfaWQiOiJBRE0tMzAwMDAxIn0.j2ZGr-qLuwqSxfrZuKOi3EhKRYekR6c1nbrlVlZSalY body=
-2026-11-23 02:58:33,457 method=GET path=/api/staff/security/incidents/3 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwcml2YWN5QG1lZGl2YXVsdC50ZXN0IiwidXNlcl9pZCI6NSwiZW1haWwiOiJwcml2YWN5QG1lZGl2YXVsdC50ZXN0Iiwicm9sZSI6ImFkbWluX2RwbyIsInBhdGllbnRfaWQiOiJBRE0tMzAwMDAxIn0.j2ZGr-qLuwqSxfrZuKOi3EhKRYekR6c1nbrlVlZSalY body=
-2026-11-23 02:59:09,333 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:59:10,615 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"WrongPassword!"}
-2026-11-23 02:59:11,872 method=POST path=/api/auth/register query= authorization= body={"email":"new_patient@example.test","password":"SecurePassword123!","full_name":"Meera Nambiar","role":"patient","date_of_birth":"1992-04-12","gender":"Female","phone":"+91-98765-00000","emergency_contact":"Father (+91-98765-00001)"}
-2026-11-23 02:59:13,155 method=POST path=/api/auth/register query= authorization= body={"email":"patient01@example.test","password":"Password123!","full_name":"Duplicate User"}
-2026-11-23 02:59:14,314 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:59:14,569 method=GET path=/api/auth/me query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:59:15,650 method=GET path=/api/auth/me query= authorization= body=
-2026-11-23 02:59:17,233 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:59:17,580 method=GET path=/api/patients/me query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:59:19,353 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:59:19,728 method=GET path=/api/patients/PAT-DEMO-002 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:59:21,572 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:59:21,916 method=GET path=/api/patients/PAT-UNKNOWN-999 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:59:23,797 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:59:24,165 method=PUT path=/api/patients/PAT-DEMO-001 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body={"allergies":"Penicillin, Latex, Pollen","medications":"Metformin 500mg, Lisinopril 10mg","emergency_contact":"Sunita Sharma (+91-98765-43219)","blood_group":"B+"}
-2026-11-23 02:59:25,995 method=GET path=/api/patients/me query= authorization= body=
-2026-11-23 02:59:27,851 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:59:28,211 method=GET path=/api/patients/PAT-DEMO-002 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:59:28,227 method=GET path=/api/patients/PAT-DEMO-002/reports query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:59:30,021 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:59:30,386 method=GET path=/api/patients/me query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:59:32,276 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:59:32,655 method=GET path=/api/privacy/consent query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:59:32,683 method=POST path=/api/privacy/consent query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body={"purpose":"third_party_sharing","is_granted":true}
-2026-11-23 02:59:34,548 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:59:34,914 method=POST path=/api/privacy/rights-request query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body={"request_type":"export","details":"Full health summary and diagnostic records"}
-2026-11-23 02:59:36,784 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:59:37,163 method=POST path=/api/privacy/grievance query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body={"subject":"Inquiry regarding data processing policy","description":"Requesting confirmation on retention period for inactive profile.","contact_email":"patient01@example.test"}
-2026-11-23 02:59:39,035 method=GET path=/api/privacy/consent query= authorization= body=
-2026-11-23 02:59:39,046 method=POST path=/api/privacy/rights-request query= authorization= body={"request_type":"export"}
-2026-11-23 02:59:40,857 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:59:41,207 method=DELETE path=/api/privacy/account query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:59:41,227 method=GET path=/api/patients/me query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:59:41,240 method=POST path=/api/auth/login query= authorization= body={"email":"doctor@example.test","password":"Password123!"}
-2026-11-23 02:59:41,606 method=GET path=/api/staff/patients/PAT-DEMO-001 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 02:59:43,493 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:59:43,854 method=POST path=/api/reports/upload query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=--4fd46d04eb16ae16e32ba3d38ffd420c
-Content-Disposition: form-data; name="title"
-
-Comprehensive Blood Metabolic Panel
---4fd46d04eb16ae16e32ba3d38ffd420c
-Content-Disposition: form-data; name="report_type"
-
-Lab Report
---4fd46d04eb16ae16e32ba3d38ffd420c
-Content-Disposition: form-data; name="doctor_name"
-
-Dr. Ananya Rao
---4fd46d04eb16ae16e32ba3d38ffd420c
-Content-Disposition: form-data; name="patient_id"
-
-PAT-DEMO-001
---4fd46d04eb16ae16e32ba3d38ffd420c
-Content-Disposition: form-data; name="is_sensitive"
-
-false
---4fd46d04eb16ae16e32ba3d38ffd420c
-Content-Disposition: form-data; name="file"; filename="lab_report_test.pdf"
-Content-Type: application/pdf
-
-%PDF-1.4 Synthetic Demonstration Report Content
---4fd46d04eb16ae16e32ba3d38ffd420c--
-
-2026-11-23 02:59:45,743 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:59:46,106 method=POST path=/api/reports/upload query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=--32b034725a675e6f09b126098e2a0e7d
-Content-Disposition: form-data; name="title"
-
-Spirometry Pulmonary Assessment
---32b034725a675e6f09b126098e2a0e7d
-Content-Disposition: form-data; name="report_type"
-
-Diagnostic Summary
---32b034725a675e6f09b126098e2a0e7d
-Content-Disposition: form-data; name="patient_id"
-
-PAT-DEMO-001
---32b034725a675e6f09b126098e2a0e7d
-Content-Disposition: form-data; name="file"; filename="spirometry_test.pdf"
-Content-Type: application/pdf
-
-Synthetic spirometry test
---32b034725a675e6f09b126098e2a0e7d--
-
-2026-11-23 02:59:46,126 method=GET path=/api/reports query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:59:46,142 method=GET path=/api/reports/1 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:59:46,158 method=GET path=/api/reports/1/download query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:59:47,997 method=GET path=/api/reports query= authorization= body=
-2026-11-23 02:59:49,855 method=POST path=/api/auth/login query= authorization= body={"email":"reception@example.test","password":"Password123!"}
-2026-11-23 02:59:50,221 method=GET path=/api/staff/patients query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MywiZW1haWwiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2Jhc2ljIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMSJ9.EinFbnIbhdj-KRqpUA3dgrtdzRlK3UQLQAP8BYXgJSw body=
-2026-11-23 02:59:52,105 method=POST path=/api/auth/login query= authorization= body={"email":"doctor@example.test","password":"Password123!"}
-2026-11-23 02:59:52,473 method=GET path=/api/staff/patients query=search=Aarav authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 02:59:52,492 method=GET path=/api/staff/patients query=search=PAT-DEMO-002 authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 02:59:52,508 method=GET path=/api/staff/patients query=search=NonexistentNameXYZ authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 02:59:54,306 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
-2026-11-23 02:59:54,680 method=GET path=/api/staff/patients query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
-2026-11-23 02:59:56,506 method=GET path=/api/staff/patients query= authorization= body=
-2026-11-23 02:59:58,281 method=POST path=/api/auth/login query= authorization= body={"email":"reception@example.test","password":"Password123!"}
-2026-11-23 02:59:58,669 method=GET path=/api/staff/patients/PAT-DEMO-001 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MywiZW1haWwiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2Jhc2ljIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMSJ9.EinFbnIbhdj-KRqpUA3dgrtdzRlK3UQLQAP8BYXgJSw body=
-2026-11-23 03:00:00,561 method=POST path=/api/auth/login query= authorization= body={"email":"doctor@example.test","password":"Password123!"}
-2026-11-23 03:00:00,940 method=GET path=/api/staff/patients/PAT-UNKNOWN-999 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 03:00:02,820 method=POST path=/api/auth/login query= authorization= body={"email":"reception@example.test","password":"Password123!"}
-2026-11-23 03:00:03,194 method=GET path=/api/staff/patients/PAT-DEMO-002/clinical query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MywiZW1haWwiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2Jhc2ljIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMSJ9.EinFbnIbhdj-KRqpUA3dgrtdzRlK3UQLQAP8BYXgJSw body=
-2026-11-23 03:00:03,214 method=POST path=/api/auth/login query= authorization= body={"email":"doctor@example.test","password":"Password123!"}
-2026-11-23 03:00:03,584 method=GET path=/api/staff/patients/PAT-DEMO-002/clinical query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 03:00:05,358 method=POST path=/api/auth/login query= authorization= body={"email":"doctor@example.test","password":"Password123!"}
-2026-11-23 03:00:05,718 method=GET path=/api/staff/audit-logs query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
-2026-11-23 03:00:05,736 method=GET path=/api/staff/security/incidents/1 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
+2026-11-23 05:23:13,125 method=GET path=/api/reports query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
+2026-11-23 05:23:13,140 method=GET path=/api/reports/1 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
+2026-11-23 05:23:13,158 method=GET path=/api/reports/1/download query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
+2026-11-23 05:23:13,197 method=GET path=/api/reports query= authorization= body=
+2026-11-23 05:23:13,224 method=POST path=/api/auth/login query= authorization= body={"email":"reception@example.test","password":"Password123!"}
+2026-11-23 05:23:13,237 method=GET path=/api/staff/patients query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MywiZW1haWwiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2Jhc2ljIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMSJ9.EinFbnIbhdj-KRqpUA3dgrtdzRlK3UQLQAP8BYXgJSw body=
+2026-11-23 05:23:13,274 method=POST path=/api/auth/login query= authorization= body={"email":"doctor@example.test","password":"Password123!"}
+2026-11-23 05:23:13,287 method=GET path=/api/staff/patients query=search=Aarav authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
+2026-11-23 05:23:13,306 method=GET path=/api/staff/patients query=search=PAT-DEMO-002 authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
+2026-11-23 05:23:13,323 method=GET path=/api/staff/patients query=search=NonexistentNameXYZ authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
+2026-11-23 05:23:13,355 method=POST path=/api/auth/login query= authorization= body={"email":"patient01@example.test","password":"Password123!"}
+2026-11-23 05:23:13,369 method=GET path=/api/staff/patients query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MSwiZW1haWwiOiJwYXRpZW50MDFAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULURFTU8tMDAxIn0.zLeJHfGwxfAksmaW1sQGA9b3Rqo0JV6xRh5T6mWHBbg body=
+2026-11-23 05:23:13,398 method=GET path=/api/staff/patients query= authorization= body=
+2026-11-23 05:23:13,427 method=POST path=/api/auth/login query= authorization= body={"email":"reception@example.test","password":"Password123!"}
+2026-11-23 05:23:13,441 method=GET path=/api/staff/patients/PAT-DEMO-001 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MywiZW1haWwiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2Jhc2ljIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMSJ9.EinFbnIbhdj-KRqpUA3dgrtdzRlK3UQLQAP8BYXgJSw body=
+2026-11-23 05:23:13,479 method=POST path=/api/auth/login query= authorization= body={"email":"doctor@example.test","password":"Password123!"}
+2026-11-23 05:23:13,492 method=GET path=/api/staff/patients/PAT-UNKNOWN-999 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
+2026-11-23 05:23:13,523 method=POST path=/api/auth/login query= authorization= body={"email":"reception@example.test","password":"Password123!"}
+2026-11-23 05:23:13,538 method=GET path=/api/staff/patients/PAT-DEMO-002/clinical query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6MywiZW1haWwiOiJyZWNlcHRpb25AZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2Jhc2ljIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMSJ9.EinFbnIbhdj-KRqpUA3dgrtdzRlK3UQLQAP8BYXgJSw body=
+2026-11-23 05:23:13,554 method=POST path=/api/auth/login query= authorization= body={"email":"doctor@example.test","password":"Password123!"}
+2026-11-23 05:23:13,567 method=GET path=/api/staff/patients/PAT-DEMO-002/clinical query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
+2026-11-23 05:23:13,598 method=POST path=/api/auth/login query= authorization= body={"email":"doctor@example.test","password":"Password123!"}
+2026-11-23 05:23:13,613 method=GET path=/api/staff/audit-logs query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
+2026-11-23 05:23:13,629 method=GET path=/api/staff/security/incidents/1 query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkb2N0b3JAZXhhbXBsZS50ZXN0IiwidXNlcl9pZCI6NCwiZW1haWwiOiJkb2N0b3JAZXhhbXBsZS50ZXN0Iiwicm9sZSI6InN0YWZmX2NsaW5pY2FsIiwicGF0aWVudF9pZCI6IlNURi1ERU1PLTAwMiJ9.HsP74d_1PUMzS1y_8cGZ4jod7nhJYFqWVb1Ldpv-SK8 body=
+2026-11-23 05:23:14,333 method=POST path=/api/auth/register query= authorization= body={"email":"ABC@notgmail.com","password":"Ulquior","full_name":"Grimjow","role":"patient","phone":"05","gender":"Male"}
+2026-11-23 05:23:15,354 method=GET path=/api/reports query=patient_id=PAT-95835FD9 authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmNAbm90Z21haWwuY29tIiwidXNlcl9pZCI6NywiZW1haWwiOiJhYmNAbm90Z21haWwuY29tIiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULTk1ODM1RkQ5In0.fXUKFsfHLhzGeeR4zxWPeC7fJzsN50Z89oc3NFxBtmg body=
+2026-11-23 05:23:27,017 method=GET path=/api/patients/me query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmNAbm90Z21haWwuY29tIiwidXNlcl9pZCI6NywiZW1haWwiOiJhYmNAbm90Z21haWwuY29tIiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULTk1ODM1RkQ5In0.fXUKFsfHLhzGeeR4zxWPeC7fJzsN50Z89oc3NFxBtmg body=
+2026-11-23 05:23:27,032 method=GET path=/api/patients/me query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmNAbm90Z21haWwuY29tIiwidXNlcl9pZCI6NywiZW1haWwiOiJhYmNAbm90Z21haWwuY29tIiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULTk1ODM1RkQ5In0.fXUKFsfHLhzGeeR4zxWPeC7fJzsN50Z89oc3NFxBtmg body=
+2026-11-23 05:23:28,363 method=GET path=/api/reports query=patient_id=PAT-95835FD9 authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmNAbm90Z21haWwuY29tIiwidXNlcl9pZCI6NywiZW1haWwiOiJhYmNAbm90Z21haWwuY29tIiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULTk1ODM1RkQ5In0.fXUKFsfHLhzGeeR4zxWPeC7fJzsN50Z89oc3NFxBtmg body=
+2026-11-23 05:23:28,375 method=GET path=/api/reports query=patient_id=PAT-95835FD9 authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmNAbm90Z21haWwuY29tIiwidXNlcl9pZCI6NywiZW1haWwiOiJhYmNAbm90Z21haWwuY29tIiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULTk1ODM1RkQ5In0.fXUKFsfHLhzGeeR4zxWPeC7fJzsN50Z89oc3NFxBtmg body=
+2026-11-23 05:23:29,496 method=GET path=/api/privacy/consent query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmNAbm90Z21haWwuY29tIiwidXNlcl9pZCI6NywiZW1haWwiOiJhYmNAbm90Z21haWwuY29tIiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULTk1ODM1RkQ5In0.fXUKFsfHLhzGeeR4zxWPeC7fJzsN50Z89oc3NFxBtmg body=
+2026-11-23 05:23:29,525 method=GET path=/api/privacy/consent query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmNAbm90Z21haWwuY29tIiwidXNlcl9pZCI6NywiZW1haWwiOiJhYmNAbm90Z21haWwuY29tIiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULTk1ODM1RkQ5In0.fXUKFsfHLhzGeeR4zxWPeC7fJzsN50Z89oc3NFxBtmg body=
+2026-11-23 05:23:32,913 method=GET path=/api/privacy/consent query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmNAbm90Z21haWwuY29tIiwidXNlcl9pZCI6NywiZW1haWwiOiJhYmNAbm90Z21haWwuY29tIiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULTk1ODM1RkQ5In0.fXUKFsfHLhzGeeR4zxWPeC7fJzsN50Z89oc3NFxBtmg body=
+2026-11-23 05:23:32,927 method=GET path=/api/privacy/consent query= authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmNAbm90Z21haWwuY29tIiwidXNlcl9pZCI6NywiZW1haWwiOiJhYmNAbm90Z21haWwuY29tIiwicm9sZSI6InBhdGllbnQiLCJwYXRpZW50X2lkIjoiUEFULTk1ODM1RkQ5In0.fXUKFsfHLhzGeeR4zxWPeC7fJzsN50Z89oc3NFxBtmg body=

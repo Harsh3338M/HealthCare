@@ -234,22 +234,22 @@ All flaws are **always active** — no mode flag, no conditional branches, no UI
 
 (Replaces the former "Remediation & Dual-Mode Tests" phase. Fixes are documented, not implemented.)
 
-- [ ] Task 4.1: Exploit Tests — Access Control & Data Exposure (V01–V04)
+- [x] Task 4.1: Exploit Tests — Access Control & Data Exposure (V01–V04)
   - Files: `tests/test_access_and_exposure.py`, `backend/requirements.txt`
   - Description: Pytest + HTTPX tests asserting each of V01–V04 is exploitable against a freshly seeded app. Add `pytest`/`httpx` to requirements.
   - Verification: `pytest tests/test_access_and_exposure.py -v` passes.
 
-- [ ] Task 4.2: Exploit Tests — Files, Sessions & Logging (V05–V08)
+- [x] Task 4.2: Exploit Tests — Files, Sessions & Logging (V05–V08)
   - Files: `tests/test_files_sessions_logs.py`
   - Description: Tests asserting public backup access, arbitrary file upload, non-expiring token/weak password acceptance, and PII appearing in `backend/app.log`.
   - Verification: `pytest tests/test_files_sessions_logs.py -v` passes.
 
-- [ ] Task 4.3: Exploit Tests — Privacy Workflows (V09–V12)
+- [x] Task 4.3: Exploit Tests — Privacy Workflows (V09–V12)
   - Files: `tests/test_privacy_workflows.py`
   - Description: Tests asserting soft-delete retention, pre-checked consent payload, rights requests without tracking IDs, and uncorrelated breach alert.
   - Verification: `pytest tests/test_privacy_workflows.py -v` passes.
 
-- [ ] Task 4.4: Line-Reference Registry & Checker
+- [x] Task 4.4: Line-Reference Registry & Checker
   - Files: `docs/vulnerability_refs.json`, `scripts/verify_refs.py`
   - Description: Registry mapping each `V01`–`V12` to one or more `{path, start_line, end_line, snippet}` entries. The script opens each file, confirms the snippet text appears within the stated lines, and exits non-zero on drift.
   - Verification: `python scripts/verify_refs.py` prints `OK` for all 12 vulnerabilities.
@@ -258,27 +258,27 @@ All flaws are **always active** — no mode flag, no conditional branches, no UI
 
 ## Phase 5: Documentation & Hackathon Pitch Prep
 
-- [ ] Task 5.1: README.md
+- [x] Task 5.1: README.md
   - Files: `README.md`
   - Description: Prominent educational-use disclaimer (this is the **only** place the project reveals its purpose); local setup (backend, frontend, seed, run); credentials table using the new R.4 accounts; statement that all data is fictional and the app must never be exposed to the internet or fed real data; explanation of how the synthetic identifiers are invalid by construction; pointer to `VULNERABILITY.md`.
   - Verification: Follow the README from a clean clone and reach a working login.
 
-- [ ] Task 5.2: VULNERABILITY.md — V01 to V06
+- [x] Task 5.2: VULNERABILITY.md — V01 to V06
   - Files: `VULNERABILITY.md`
   - Description: For each flaw: description, **file path and `Lstart–Lend` references with code excerpt**, step-by-step exploit with exact `curl` commands, privacy/security impact, mapped data-protection concept (notice, consent, safeguards, breach response, rights), and a **Recommended Fix** with example secure code (documentation only — not applied to the app).
   - Verification: `python scripts/verify_refs.py` passes; each curl command works against the running app.
 
-- [ ] Task 5.3: VULNERABILITY.md — V07 to V12
+- [x] Task 5.3: VULNERABILITY.md — V07 to V12
   - Files: `VULNERABILITY.md`
   - Description: Same structure as 5.2 for V07–V12, plus a summary table (ID, severity, endpoint/page, `path:line`) at the top of the file.
   - Verification: `python scripts/verify_refs.py` passes; all 12 sections present; curl/steps reproduce.
 
-- [ ] Task 5.4: Documentation Accuracy Pass
+- [x] Task 5.4: Documentation Accuracy Pass
   - Files: `VULNERABILITY.md`, `docs/vulnerability_refs.json`
   - Description: Re-run seed and all tests, regenerate any drifted line numbers, and confirm the table of contents and cross-links work.
   - Verification: `pytest tests -v` and `python scripts/verify_refs.py` both pass; line references in the doc match the registry.
 
-- [ ] Task 5.5: Live Demo Rehearsal
+- [x] Task 5.5: Live Demo Rehearsal
   - Files: `README.md`
   - Description: Rehearse the 7-minute flow without a mode toggle: normal patient journey → live exploits (IDOR, API exposure, public file/backup, dark-pattern consent, uncorrelated breach alert) → open `VULNERABILITY.md` and code at the referenced lines to walk through each fix. Add a short "Demo Flow" section to `README.md`.
   - Verification: Complete end-to-end dry run in browser and terminal; zero console errors; the site shows no lab indicators at any point.

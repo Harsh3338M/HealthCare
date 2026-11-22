@@ -25,7 +25,7 @@ export default function Navbar({ currentUser, onOpenAuth, onLogout, activeView, 
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-extrabold text-lg tracking-tight text-slate-900">DawaiLelo</span>
+                <span className="font-extrabold text-lg tracking-tight text-slate-900">Vita</span>
               </div>
               <p className="text-[11px] text-slate-500 font-medium">Healthcare Patient &amp; Clinical Portal</p>
             </div>

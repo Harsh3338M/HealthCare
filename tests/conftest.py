@@ -18,7 +18,20 @@ from sqlalchemy.pool import StaticPool
 from backend.app.database import Base, get_db
 from backend.app.main import app
 from backend.app.models import AuditLog, IdentityRecord, PatientProfile, User
+from backend.app.routes import auth
 from backend.app.routes.auth import hash_password
+
+PRECOMPUTED_HASH = hash_password("Password123!")
+_orig_verify = auth.verify_password
+
+
+def _fast_verify(plain: str, hashed: str) -> bool:
+    if plain == "Password123!" and hashed == PRECOMPUTED_HASH:
+        return True
+    return _orig_verify(plain, hashed)
+
+
+auth.verify_password = _fast_verify
 
 test_engine = create_engine(
     "sqlite:///:memory:",
@@ -54,7 +67,7 @@ def reset_db_data():
     # Seed patient01
     user1 = User(
         email="patient01@example.test",
-        password_hash=hash_password("Password123!"),
+        password_hash=PRECOMPUTED_HASH,
         full_name="Aarav Sharma",
         role="patient",
         patient_id="PAT-DEMO-001",
@@ -96,7 +109,7 @@ def reset_db_data():
     # Seed patient02
     user2 = User(
         email="patient02@example.test",
-        password_hash=hash_password("Password123!"),
+        password_hash=PRECOMPUTED_HASH,
         full_name="Priya Patel",
         role="patient",
         patient_id="PAT-DEMO-002",
@@ -126,7 +139,7 @@ def reset_db_data():
     # Seed staff demo users (reception, doctor, privacy)
     user_reception = User(
         email="reception@example.test",
-        password_hash=hash_password("Password123!"),
+        password_hash=PRECOMPUTED_HASH,
         full_name="Rohan Verma (Front Desk)",
         role="staff_basic",
         patient_id="STF-DEMO-001",
@@ -136,7 +149,7 @@ def reset_db_data():
 
     user_doctor = User(
         email="doctor@example.test",
-        password_hash=hash_password("Password123!"),
+        password_hash=PRECOMPUTED_HASH,
         full_name="Dr. Ananya Rao (Chief Medical Officer)",
         role="staff_clinical",
         patient_id="STF-DEMO-002",
@@ -146,7 +159,7 @@ def reset_db_data():
 
     user_privacy = User(
         email="privacy@example.test",
-        password_hash=hash_password("Password123!"),
+        password_hash=PRECOMPUTED_HASH,
         full_name="Suresh Menon (Data Protection Officer)",
         role="admin_dpo",
         patient_id="ADM-DEMO-001",
