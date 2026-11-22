@@ -1,0 +1,1 @@
+"""MediVault application package."""
