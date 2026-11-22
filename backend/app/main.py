@@ -13,6 +13,7 @@ from backend.app.config import settings
 from backend.app.routes.auth import router as auth_router
 from backend.app.routes.patients import router as patients_router
 from backend.app.routes.reports import router as reports_router
+from backend.app.routes.staff import router as staff_router
 
 app = FastAPI(
     title="MediVault Healthcare API",
@@ -33,6 +34,7 @@ app.add_middleware(
 app.include_router(auth_router)
 app.include_router(patients_router)
 app.include_router(reports_router)
+app.include_router(staff_router)
 
 
 class ModeToggleRequest(BaseModel):

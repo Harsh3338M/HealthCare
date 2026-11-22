@@ -1,7 +1,7 @@
 # MediVault — Progress Tracking
 
 - **Current Phase:** Phase 2
-- **Last Completed Task:** Task 2.6: Frontend Medical Reports Manager & Viewer
+- **Last Completed Task:** Task 2.7: Staff Patient Directory API
 - **Architectural Decisions & Deviations:**
   - `backend/app/config.py`: Exports `settings` (`Settings`) with `APP_MODE` (`LAB_VULNERABLE` default), `DATABASE_URL`, `SECRET_KEY`, `ALGORITHM`, `ACCESS_TOKEN_EXPIRE_MINUTES`, `UPLOAD_DIR`, and `BACKUP_DIR`.
   - `backend/app/database.py`: Exports `engine`, `SessionLocal`, `Base`, and `get_db` dependency for FastAPI routes. SQLite `check_same_thread=False` configured.
@@ -13,10 +13,12 @@
   - `backend/app/routes/patients.py`: Implemented patient endpoints `GET /api/patients/me`, `GET /api/patients/{patient_id}`, and `PUT /api/patients/{patient_id}` with automatic profile initialization and IdentityRecord synchronization.
   - `backend/app/schemas/report.py`: Created `MedicalReportResponse` schema.
   - `backend/app/routes/reports.py`: Implemented `GET /api/reports`, `GET /api/reports/{id}`, multipart `POST /api/reports/upload` saving documents to `lab-data/uploads/`, and authenticated document streaming `GET /api/reports/{id}/download`.
-  - `backend/app/main.py`: Mounted `auth_router`, `patients_router`, and `reports_router`.
+  - `backend/app/schemas/staff.py`: Created DTO schemas `StaffPatientListItem`, `StaffPatientDetailResponse`, and `StaffClinicalRecordResponse`.
+  - `backend/app/routes/staff.py`: Implemented `GET /api/staff/patients` (directory search/list), `GET /api/staff/patients/{patient_id}` (record inspector with audit logging), `GET /api/staff/patients/{patient_id}/clinical` (mode-aware clinical access), and `require_staff_user` RBAC dependency.
+  - `backend/app/main.py`: Mounted `auth_router`, `patients_router`, `reports_router`, and `staff_router`.
   - `frontend/src/services/api.js`: Added `reportsApi` (`listReports`, `getReport`, `uploadReport`, `getDownloadUrl`) along with `patientApi`, `authApi`, and `modeApi`.
   - `frontend/src/components/ReportUploader.jsx`: Drag-and-drop document upload modal with category selectors, synthetic disclaimer alerts, and one-click sample report generation.
   - `frontend/src/pages/Reports.jsx`: Diagnostic document vault featuring full-text search, category tabs, document inspection modal, and file download streaming.
   - `frontend/src/App.jsx`: Integrated `Reports` view into app shell routing and navigation links. Verified clean production build (`npm run build`).
 - **Known Issues / Blockers:** None
-- **Next Task:** Task 2.7: Staff Patient Directory API
+- **Next Task:** Task 2.8: Frontend Staff / Admin Dashboard

@@ -75,7 +75,7 @@ This document tracks sequential, atomic tasks derived from the MediVault Impleme
   - Description: Build file upload dropzone and synthetic lab report list with preview and download actions.
   - Verification: Run `npm run build` in `frontend/` to verify report upload and viewer components compile with no errors.
 
-- [ ] Task 2.7: Staff Patient Directory API
+- [x] Task 2.7: Staff Patient Directory API
   - Files: `backend/app/routes/staff.py`, `backend/app/schemas/staff.py`, `backend/app/main.py`
   - Description: Implement staff endpoints `GET /api/staff/patients` (search and list synthetic patients) and `GET /api/staff/patients/{id}` (inspect patient clinical record).
   - Verification: Send GET `/api/staff/patients` using a staff token; verify 200 OK response returning synthetic patient list.

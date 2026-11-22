@@ -126,10 +126,42 @@ def reset_db_data():
         allergies="Peanuts",
         conditions="Asthma",
         medications="Salbutamol Inhaler",
+        medical_notes="Asthma controlled. Counseling: requested cardiac genetics screening.",
         aadhaar_demo_ref="DEMO-AADHAAR-0002",
         is_active=True,
     )
     db.add(profile2)
+
+    # Seed staff demo users (reception, doctor, privacy)
+    user_reception = User(
+        email="reception@example.test",
+        password_hash=hash_password("Password123!"),
+        full_name="Rohan Verma (Front Desk)",
+        role="staff_basic",
+        patient_id="STF-DEMO-001",
+        is_active=True,
+    )
+    db.add(user_reception)
+
+    user_doctor = User(
+        email="doctor@example.test",
+        password_hash=hash_password("Password123!"),
+        full_name="Dr. Ananya Rao (Chief Medical Officer)",
+        role="staff_clinical",
+        patient_id="STF-DEMO-002",
+        is_active=True,
+    )
+    db.add(user_doctor)
+
+    user_privacy = User(
+        email="privacy@example.test",
+        password_hash=hash_password("Password123!"),
+        full_name="Suresh Menon (Data Protection Officer)",
+        role="admin_dpo",
+        patient_id="ADM-DEMO-001",
+        is_active=True,
+    )
+    db.add(user_privacy)
 
     db.commit()
     db.close()
