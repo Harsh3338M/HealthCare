@@ -1,6 +1,6 @@
 """MediVault Staff Portal API Routes.
 
-Provides endpoints for staff members to search and list synthetic patient records
+Provides endpoints for staff members to search and list patient records
 (GET /api/staff/patients), inspect full clinical files (GET /api/staff/patients/{patient_id}),
 and access specialized clinical histories (GET /api/staff/patients/{patient_id}/clinical).
 """
@@ -10,11 +10,11 @@ from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy import or_
 from sqlalchemy.orm import Session
 
-from backend.app.config import settings
 from backend.app.database import get_db
 from backend.app.models import AuditLog, PatientProfile, User
 from backend.app.routes.auth import get_current_user
 from backend.app.schemas.staff import (
+    StaffAuditLogResponse,
     StaffClinicalRecordResponse,
     StaffPatientDetailResponse,
     StaffPatientListItem,
@@ -41,7 +41,7 @@ def list_patients(
     current_user: User = Depends(require_staff_user),
     db: Session = Depends(get_db),
 ):
-    """List synthetic patient records with optional keyword search across profile fields."""
+    """List patient records with optional keyword search across profile fields."""
     query = db.query(PatientProfile)
 
     if search and search.strip():
@@ -70,8 +70,8 @@ def list_patients(
             blood_group=p.blood_group,
             allergies=p.allergies,
             conditions=p.conditions,
-            aadhaar_demo_ref=p.aadhaar_demo_ref,
-            ayushman_demo_ref=p.ayushman_demo_ref,
+            aadhaar_ref=p.aadhaar_ref,
+            ayushman_ref=p.ayushman_ref,
             is_active=p.is_active,
             reports_count=len(p.reports) if p.reports else 0,
             created_at=p.created_at,
@@ -121,13 +121,6 @@ def get_patient_clinical_history(
     db: Session = Depends(get_db),
 ):
     """Retrieve restricted clinical history and confidential physician notes."""
-    # In LAB_REMEDIATED mode, enforce strict RBAC: only clinical doctors and DPOs can view
-    if settings.APP_MODE == "LAB_REMEDIATED" and current_user.role not in ("staff_clinical", "admin_dpo"):
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Access denied: Clinical staff or DPO role required to view confidential clinical notes",
-        )
-
     patient = (
         db.query(PatientProfile)
         .filter(PatientProfile.patient_id == patient_id)
@@ -141,3 +134,19 @@ def get_patient_clinical_history(
         )
 
     return StaffClinicalRecordResponse.model_validate(patient)
+
+
+@router.get("/audit-logs", response_model=List[StaffAuditLogResponse])
+def list_audit_logs(
+    limit: int = Query(50, ge=1, le=200, description="Maximum number of log events to return"),
+    current_user: User = Depends(require_staff_user),
+    db: Session = Depends(get_db),
+):
+    """Retrieve operational security and access audit logs."""
+    logs = (
+        db.query(AuditLog)
+        .order_by(AuditLog.timestamp.desc())
+        .limit(limit)
+        .all()
+    )
+    return [StaffAuditLogResponse.model_validate(log) for log in logs]

@@ -25,7 +25,7 @@ def test_get_patient_me(client):
     assert data["full_name"] == "Aarav Sharma"
     assert data["blood_group"] == "B+"
     assert data["conditions"] == "Type-2 Diabetes"
-    assert data["aadhaar_demo_ref"] == "DEMO-AADHAAR-0001"
+    assert data["aadhaar_ref"] == "DEMO-AADHAAR-0001"
     assert len(data["identity_records"]) == 1
 
 
@@ -75,3 +75,24 @@ def test_update_patient_profile(client):
 def test_unauthenticated_request_rejected(client):
     response = client.get("/api/patients/me")
     assert response.status_code == 401
+
+
+def test_v01_idor_access_patient_profile_and_reports(client):
+    """V01 BOLA/IDOR: Authenticated patient can access another patient's record and reports."""
+    token = get_patient01_token(client)
+    # Request patient 02 profile
+    resp_profile = client.get(
+        "/api/patients/PAT-DEMO-002",
+        headers={"Authorization": f"Bearer {token}"},
+    )
+    assert resp_profile.status_code == 200
+    assert resp_profile.json()["patient_id"] == "PAT-DEMO-002"
+    assert resp_profile.json()["full_name"] == "Priya Patel"
+
+    # Request patient 02 reports
+    resp_reports = client.get(
+        "/api/patients/PAT-DEMO-002/reports",
+        headers={"Authorization": f"Bearer {token}"},
+    )
+    assert resp_reports.status_code == 200
+    assert isinstance(resp_reports.json(), list)

@@ -14,7 +14,7 @@ class User(Base):
     password_hash = Column(String(255), nullable=False)
     full_name = Column(String(255), nullable=False)
     role = Column(String(50), nullable=False, default="patient")  # patient, staff_basic, staff_clinical, admin_dpo
-    patient_id = Column(String(50), unique=True, index=True, nullable=True)  # PAT-DEMO-001 or staff reference
+    patient_id = Column(String(50), unique=True, index=True, nullable=True)  # PAT-100001 or staff reference
     is_active = Column(Boolean, default=True, nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
 
@@ -28,11 +28,11 @@ class User(Base):
 
 
 class PatientProfile(Base):
-    """Synthetic healthcare profile storing patient vitals, identity references, and clinical notes."""
+    """Healthcare profile storing patient vitals, identity references, and clinical notes."""
     __tablename__ = "patient_profiles"
 
     id = Column(Integer, primary_key=True, index=True)
-    patient_id = Column(String(50), unique=True, index=True, nullable=False)  # e.g. PAT-DEMO-001
+    patient_id = Column(String(50), unique=True, index=True, nullable=False)  # e.g. PAT-100001
     user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), unique=True, nullable=True)
     full_name = Column(String(255), nullable=False)
     date_of_birth = Column(String(50), nullable=True)
@@ -46,8 +46,8 @@ class PatientProfile(Base):
     conditions = Column(Text, nullable=True)
     medications = Column(Text, nullable=True)
     medical_notes = Column(Text, nullable=True)  # Doctor/clinical notes (V02/V04 target)
-    aadhaar_demo_ref = Column(String(100), nullable=True)  # Synthetic Aadhaar e.g. DEMO-AADHAAR-0001
-    ayushman_demo_ref = Column(String(100), nullable=True)  # Synthetic Ayushman e.g. DEMO-PM-JAY-0001
+    aadhaar_ref = Column(String(100), nullable=True)  # Aadhaar reference
+    ayushman_ref = Column(String(100), nullable=True)  # Ayushman reference
     is_active = Column(Boolean, default=True, nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
@@ -62,15 +62,15 @@ class PatientProfile(Base):
 
 
 class IdentityRecord(Base):
-    """Synthetic identity scheme metadata (Aadhaar / Ayushman Bharat PM-JAY test identifiers)."""
+    """Identity scheme metadata (Aadhaar / Ayushman Bharat PM-JAY identifiers)."""
     __tablename__ = "identity_records"
 
     id = Column(Integer, primary_key=True, index=True)
     patient_profile_id = Column(Integer, ForeignKey("patient_profiles.id", ondelete="CASCADE"), nullable=True)
     patient_id = Column(String(50), index=True, nullable=False)
-    scheme_name = Column(String(100), nullable=False)  # e.g. "Synthetic Aadhaar", "Ayushman Bharat PM-JAY"
-    aadhaar_demo_ref = Column(String(100), nullable=True)
-    ayushman_demo_ref = Column(String(100), nullable=True)
+    scheme_name = Column(String(100), nullable=False)  # e.g. "Aadhaar Card", "Ayushman Bharat PM-JAY"
+    aadhaar_ref = Column(String(100), nullable=True)
+    ayushman_ref = Column(String(100), nullable=True)
     document_filename = Column(String(255), nullable=True)
     verification_status = Column(String(50), default="verified", nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
@@ -83,7 +83,7 @@ class IdentityRecord(Base):
 
 
 class MedicalReport(Base):
-    """Synthetic medical reports, lab documents, and prescriptions stored on the filesystem."""
+    """Medical reports, lab documents, and prescriptions stored on the filesystem."""
     __tablename__ = "medical_reports"
 
     id = Column(Integer, primary_key=True, index=True)
@@ -109,7 +109,7 @@ class MedicalReport(Base):
 
 
 class ConsentRecord(Base):
-    """Granular synthetic consent preferences and audit history for privacy compliance demonstrations."""
+    """Granular consent preferences and audit history."""
     __tablename__ = "consent_records"
 
     id = Column(Integer, primary_key=True, index=True)
@@ -138,11 +138,11 @@ class AuditLog(Base):
     actor_email = Column(String(255), nullable=True)
     action = Column(String(100), nullable=False)  # LOGIN, VIEW_PATIENT, UPLOAD_REPORT, EXPORT_DATA, etc.
     endpoint = Column(String(255), nullable=True)  # API endpoint accessed
-    target_resource_id = Column(String(100), index=True, nullable=True)  # ID of target entity (e.g. PAT-DEMO-002)
+    target_resource_id = Column(String(100), index=True, nullable=True)  # ID of target entity (e.g. PAT-100002)
     ip_address = Column(String(100), nullable=True)
     status = Column(String(50), default="SUCCESS", nullable=False)  # SUCCESS, FAILED, UNAUTHORIZED, BREACH_ALERT
     status_code = Column(Integer, nullable=True)
-    request_payload = Column(Text, nullable=True)  # Unsanitized in vulnerable mode; redacted in remediated mode
+    request_payload = Column(Text, nullable=True)  # Captured HTTP request payload string
     details = Column(Text, nullable=True)
     timestamp = Column(DateTime, default=datetime.utcnow, index=True, nullable=False)
 

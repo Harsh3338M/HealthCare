@@ -6,7 +6,6 @@ import {
   CheckCircle2,
   AlertCircle,
   X,
-  Sparkles,
   FileCheck2,
   Lock
 } from 'lucide-react'
@@ -59,18 +58,6 @@ export default function ReportUploader({ patientId, onUploadSuccess, onClose }) 
     }
   }
 
-  // Generate Synthetic Dummy Blob for Instant 1-Click Testing
-  const handleUseSyntheticSample = () => {
-    const sampleText = `%PDF-1.4\n% Synthetic MediVault Diagnostic Report\nPATIENT_ID: ${patientId || 'PAT-DEMO-001'}\nTEST: Fasting Blood Sugar & HbA1c Panel\nFINDINGS: Glucose 118 mg/dL (Elevated), HbA1c 6.8% (Target: < 7.0%)\nCONCLUSION: Synthetic Clinical Test Result Only\n`
-    const sampleBlob = new Blob([sampleText], { type: 'application/pdf' })
-    const sampleFile = new File([sampleBlob], `synthetic_blood_panel_${Date.now().toString().slice(-4)}.pdf`, {
-      type: 'application/pdf',
-    })
-    selectFile(sampleFile)
-    setTitle('Fasting Blood Glucose & HbA1c Diagnostic Panel')
-    setReportType('Lab Report')
-  }
-
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (!file) {
@@ -88,7 +75,7 @@ export default function ReportUploader({ patientId, onUploadSuccess, onClose }) 
       formData.append('title', title.trim())
       formData.append('report_type', reportType)
       formData.append('doctor_name', doctorName.trim())
-      formData.append('patient_id', patientId || 'PAT-DEMO-001')
+      formData.append('patient_id', patientId || 'PAT-100001')
       formData.append('is_sensitive', isSensitive ? 'true' : 'false')
 
       const res = await reportsApi.uploadReport(formData)
@@ -116,7 +103,7 @@ export default function ReportUploader({ patientId, onUploadSuccess, onClose }) 
           </div>
           <div>
             <h3 className="font-bold text-sm tracking-tight">Upload Medical Document</h3>
-            <p className="text-[11px] text-slate-400">Save synthetic diagnostic report or prescription</p>
+            <p className="text-[11px] text-slate-400">Upload diagnostic report or clinical document</p>
           </div>
         </div>
         {onClose && (
@@ -131,16 +118,6 @@ export default function ReportUploader({ patientId, onUploadSuccess, onClose }) 
       </div>
 
       <form onSubmit={handleSubmit} className="p-6 space-y-5">
-        {/* Synthetic Notice */}
-        <div className="bg-amber-50 border border-amber-200 rounded-xl p-3.5 flex items-start gap-3">
-          <AlertTriangle className="w-4 h-4 text-amber-700 flex-shrink-0 mt-0.5" />
-          <div className="text-[11px] text-amber-900 leading-relaxed">
-            <span className="font-bold">Synthetic Documents Only: </span>
-            This lab environment saves files to <code className="font-mono bg-amber-100 px-1 rounded">lab-data/uploads/</code>.
-            Do not upload real patient records, Aadhaar scans, or confidential files.
-          </div>
-        </div>
-
         {/* Dropzone */}
         <div
           onDragEnter={handleDrag}
@@ -186,19 +163,6 @@ export default function ReportUploader({ patientId, onUploadSuccess, onClose }) 
               <div className="text-[11px] text-slate-400">PDF, PNG, JPG, or diagnostic documents</div>
             </div>
           )}
-        </div>
-
-        {/* Quick Sample Preset */}
-        <div className="flex items-center justify-between pt-1">
-          <button
-            type="button"
-            onClick={handleUseSyntheticSample}
-            className="text-xs font-semibold text-sky-600 hover:text-sky-800 flex items-center gap-1.5 transition-colors"
-          >
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Generate &amp; Attach Synthetic Sample Report</span>
-          </button>
-          <span className="text-[11px] text-slate-400 font-mono">Target: {patientId || 'PAT-DEMO-001'}</span>
         </div>
 
         {/* Form Inputs */}

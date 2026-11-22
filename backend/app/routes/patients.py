@@ -1,23 +1,25 @@
 """MediVault Patient Profile API Routes.
 
 Provides endpoints for fetching current patient profile (GET /api/patients/me),
-retrieving a profile by ID (GET /api/patients/{patient_id}), and updating
-patient records (PUT /api/patients/{patient_id}).
+retrieving a profile by ID (GET /api/patients/{patient_id}), retrieving patient
+reports by ID (GET /api/patients/{patient_id}/reports), and updating patient
+records (PUT /api/patients/{patient_id}).
 """
 
 from datetime import datetime
-from typing import Optional
+from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from backend.app.config import settings
 from backend.app.database import get_db
-from backend.app.models import IdentityRecord, PatientProfile, User
+from backend.app.models import IdentityRecord, MedicalReport, PatientProfile, User
 from backend.app.routes.auth import get_current_user
 from backend.app.schemas.patient import (
     PatientProfileResponse,
     PatientProfileUpdate,
 )
+from backend.app.schemas.report import MedicalReportResponse
 
 router = APIRouter(prefix="/api/patients", tags=["Patients"])
 
@@ -81,6 +83,33 @@ def get_patient_profile_by_id(
     return PatientProfileResponse.model_validate(profile)
 
 
+@router.get("/{patient_id}/reports", response_model=List[MedicalReportResponse])
+def get_patient_reports_by_id(
+    patient_id: str,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """Retrieve diagnostic reports and medical documents for a specific patient ID."""
+    profile = (
+        db.query(PatientProfile)
+        .filter(PatientProfile.patient_id == patient_id)
+        .first()
+    )
+    if not profile:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Patient with ID '{patient_id}' not found",
+        )
+
+    reports = (
+        db.query(MedicalReport)
+        .filter(MedicalReport.patient_id == patient_id)
+        .order_by(MedicalReport.created_at.desc())
+        .all()
+    )
+    return [MedicalReportResponse.model_validate(r) for r in reports]
+
+
 @router.put("/{patient_id}", response_model=PatientProfileResponse)
 def update_patient_profile(
     patient_id: str,
@@ -88,7 +117,7 @@ def update_patient_profile(
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
-    """Update patient vitals, contact details, conditions, or synthetic identity schemes."""
+    """Update patient vitals, contact details, conditions, or identity schemes."""
     profile = (
         db.query(PatientProfile)
         .filter(PatientProfile.patient_id == patient_id)
@@ -115,30 +144,30 @@ def update_patient_profile(
         if "email" in update_data and update_data["email"]:
             profile.user.email = update_data["email"]
 
-    # Keep IdentityRecord in sync if demo references updated
-    if "aadhaar_demo_ref" in update_data and update_data["aadhaar_demo_ref"]:
+    # Keep IdentityRecord in sync if references updated
+    if "aadhaar_ref" in update_data and update_data["aadhaar_ref"]:
         id_rec = (
             db.query(IdentityRecord)
             .filter(
                 IdentityRecord.patient_id == patient_id,
-                IdentityRecord.scheme_name == "Synthetic Aadhaar",
+                IdentityRecord.scheme_name == "Aadhaar Card",
             )
             .first()
         )
         if id_rec:
-            id_rec.aadhaar_demo_ref = update_data["aadhaar_demo_ref"]
+            id_rec.aadhaar_ref = update_data["aadhaar_ref"]
         else:
             db.add(
                 IdentityRecord(
                     patient_profile_id=profile.id,
                     patient_id=patient_id,
-                    scheme_name="Synthetic Aadhaar",
-                    aadhaar_demo_ref=update_data["aadhaar_demo_ref"],
+                    scheme_name="Aadhaar Card",
+                    aadhaar_ref=update_data["aadhaar_ref"],
                     verification_status="verified",
                 )
             )
 
-    if "ayushman_demo_ref" in update_data and update_data["ayushman_demo_ref"]:
+    if "ayushman_ref" in update_data and update_data["ayushman_ref"]:
         pm_rec = (
             db.query(IdentityRecord)
             .filter(
@@ -148,14 +177,14 @@ def update_patient_profile(
             .first()
         )
         if pm_rec:
-            pm_rec.ayushman_demo_ref = update_data["ayushman_demo_ref"]
+            pm_rec.ayushman_ref = update_data["ayushman_ref"]
         else:
             db.add(
                 IdentityRecord(
                     patient_profile_id=profile.id,
                     patient_id=patient_id,
                     scheme_name="Ayushman Bharat PM-JAY",
-                    ayushman_demo_ref=update_data["ayushman_demo_ref"],
+                    ayushman_ref=update_data["ayushman_ref"],
                     verification_status="verified",
                 )
             )

@@ -1,24 +1,53 @@
 # MediVault — Progress Tracking
 
-- **Current Phase:** Phase 2
-- **Last Completed Task:** Task 2.7: Staff Patient Directory API
-- **Architectural Decisions & Deviations:**
-  - `backend/app/config.py`: Exports `settings` (`Settings`) with `APP_MODE` (`LAB_VULNERABLE` default), `DATABASE_URL`, `SECRET_KEY`, `ALGORITHM`, `ACCESS_TOKEN_EXPIRE_MINUTES`, `UPLOAD_DIR`, and `BACKUP_DIR`.
-  - `backend/app/database.py`: Exports `engine`, `SessionLocal`, `Base`, and `get_db` dependency for FastAPI routes. SQLite `check_same_thread=False` configured.
-  - `backend/app/models.py`: Defined SQLAlchemy models `User`, `PatientProfile`, `IdentityRecord`, `MedicalReport`, `ConsentRecord`, and `AuditLog` with relationship mappings and synthetic healthcare fields.
-  - `backend/app/seed.py`: Implemented synthetic seeder generating 5 demo accounts (`patient01`, `patient02`, `reception`, `doctor`, `privacy` with password `Password123!`), synthetic profiles, identity references, dummy `backup_dump.sql`, and watermarked PDFs in `lab-data/uploads/` and `lab-data/backups/`.
-  - `backend/app/schemas/auth.py`: Created Pydantic DTOs `UserLogin`, `UserRegister`, `UserResponse`, `TokenResponse`, and `TokenData`.
-  - `backend/app/routes/auth.py`: Implemented auth endpoints `POST /api/auth/register`, `POST /api/auth/login`, `GET /api/auth/me`, bcrypt password hashing/verification, and JWT access token creation/validation with `get_current_user` dependency.
-  - `backend/app/schemas/patient.py`: Created schemas `PatientProfileResponse`, `PatientProfileUpdate`, and `IdentityRecordSchema`.
-  - `backend/app/routes/patients.py`: Implemented patient endpoints `GET /api/patients/me`, `GET /api/patients/{patient_id}`, and `PUT /api/patients/{patient_id}` with automatic profile initialization and IdentityRecord synchronization.
-  - `backend/app/schemas/report.py`: Created `MedicalReportResponse` schema.
-  - `backend/app/routes/reports.py`: Implemented `GET /api/reports`, `GET /api/reports/{id}`, multipart `POST /api/reports/upload` saving documents to `lab-data/uploads/`, and authenticated document streaming `GET /api/reports/{id}/download`.
-  - `backend/app/schemas/staff.py`: Created DTO schemas `StaffPatientListItem`, `StaffPatientDetailResponse`, and `StaffClinicalRecordResponse`.
-  - `backend/app/routes/staff.py`: Implemented `GET /api/staff/patients` (directory search/list), `GET /api/staff/patients/{patient_id}` (record inspector with audit logging), `GET /api/staff/patients/{patient_id}/clinical` (mode-aware clinical access), and `require_staff_user` RBAC dependency.
-  - `backend/app/main.py`: Mounted `auth_router`, `patients_router`, `reports_router`, and `staff_router`.
-  - `frontend/src/services/api.js`: Added `reportsApi` (`listReports`, `getReport`, `uploadReport`, `getDownloadUrl`) along with `patientApi`, `authApi`, and `modeApi`.
-  - `frontend/src/components/ReportUploader.jsx`: Drag-and-drop document upload modal with category selectors, synthetic disclaimer alerts, and one-click sample report generation.
-  - `frontend/src/pages/Reports.jsx`: Diagnostic document vault featuring full-text search, category tabs, document inspection modal, and file download streaming.
-  - `frontend/src/App.jsx`: Integrated `Reports` view into app shell routing and navigation links. Verified clean production build (`npm run build`).
+- **Current Phase:** Phase 3: Implementing the 12 Permanent Vulnerabilities
+- **Last Completed Task:** Task 3.2: V02 - Excessive Staff Privileges
+- **Next Task:** Task 3.3: V03 - Excessive Data Exposure in API
+
+## Plan Change Notice
+- There is no LAB_VULNERABLE/LAB_REMEDIATED toggle. Vulnerabilities are permanent, remediations are documentation-only (VULNERABILITY.md).
+- The website must show no lab/test/demo/synthetic indicators. Disclosure lives only in README.md.
+- Every vulnerability must be documented with exact file path + line numbers, verified by `scripts/verify_refs.py`.
+- Task numbering: R.1–R.7 run next, then 2.8–2.10, then Phase 3, 4, 5.
+
+## Superseded Items To Clean Up
+- `config.py` `APP_MODE`, `main.py` mode endpoints/health `app_mode`, any `settings.APP_MODE` branches (e.g. mode-aware clinical access in `staff.py`) → R.1
+- `modeApi` in `api.js`, `ModeBanner`, mode toggle in App/Navbar, page title → R.2
+- Demo-credential buttons and synthetic warnings in `Auth.jsx` → R.3
+- `seed.py` demo accounts, `DEMO` IDs/emails, "dummy" backup, visible PDF watermarks → R.4
+- Dashboard/profile UI copy → R.5
+- `ReportUploader.jsx` synthetic disclaimer alerts/sample generator, `Reports.jsx` UI copy, and `reports.py` API messages → R.6
+- Project-wide sweep for runtime lab/test signals → R.7
+
+## Architectural Decisions & Deviations (History)
+- `Task 3.2`: Implemented V02 Excessive Staff Privileges in `backend/app/routes/staff.py` and `backend/app/schemas/staff.py`. Endpoint `GET /api/staff/patients/{patient_id}/clinical` uses `require_staff_user` which allows any staff role (such as front desk `staff_basic`) to access confidential doctor clinical notes and identity references (`aadhaar_ref`, `ayushman_ref`). Recorded in `docs/vulnerability_refs.json` (lines 117-136). Verified with in-process TestClient in `scripts/verify_v02.py` with `reception@medivault.test` successfully reading `PAT-100001` clinical notes and Aadhaar reference, test suite passing (26/26), and clean Vite build (`npm run build`).
+- `Task 3.1`: Implemented V01 Broken Object-Level Authorisation (IDOR / BOLA) in `backend/app/routes/patients.py`. `GET /api/patients/{patient_id}` and `GET /api/patients/{patient_id}/reports` authenticate callers via JWT dependencies but never verify that the `{patient_id}` corresponds to the caller's account or role. Initialized line references in `docs/vulnerability_refs.json` (lines 64-83 and 86-110). Verified with in-process TestClient in `scripts/verify_v01.py` where `patient01` successfully retrieves `PAT-100002`'s profile and reports, unit tests in `tests/test_patients.py` (all 26 tests passing), and clean frontend production build (`npm run build`).
+- `Task 2.10`: Built production healthcare landing page in `frontend/src/pages/Home.jsx` (service highlights, trust metrics, quick auth entry points, comprehensive patient FAQs) and full Data Privacy & Governance Centre in `frontend/src/pages/PrivacyCentre.jsx` (granular consent controls, health data categories breakdown, rights request form, and DPO grievance filing). Integrated both into `frontend/src/App.jsx`. Verified clean production compilation (`npm run build`), 0 matches on `grep -rniE "synthetic|educational|hackathon|demo" frontend/src/pages/Home.jsx frontend/src/pages/PrivacyCentre.jsx`, and zero lab signals project-wide. Phase 2 is now complete.
+- `Task 2.9`: Implemented Privacy Centre and Consent Management REST APIs in `backend/app/routes/privacy.py` and `backend/app/schemas/privacy.py`. Created endpoints `GET /api/privacy/consent` and `POST /api/privacy/consent` for granular patient consent preferences, `POST /api/privacy/rights-request` for Data Principal rights submissions (export, correction, erasure), and `POST /api/privacy/grievance` for submitting privacy concerns to the Data Protection Officer with audit logging. Mounted router in `backend/app/main.py` and exported `privacyApi` in `frontend/src/services/api.js`. Verified via pytest (`4 passed in 4.95s`), clean frontend build (`npm run build`), and zero lab signals.
+- `Task 2.8`: Implemented Staff & Admin Portal in `frontend/src/pages/StaffDashboard.jsx` and `frontend/src/components/PatientRecordDrawer.jsx`. Built patient search table with debounced live filtering, multi-tab clinical record inspector drawer (demographics, scheme identity verification, clinical notes, and diagnostic documents), role badge indicators for Receptionist, Physician, and DPO, and real-time operational security and audit log feed backed by `GET /api/staff/audit-logs`. Verified strictly in-process with TestClient in `scripts/validate_staff.py` and `tests/test_staff.py` (`7 passed`), zero lab signals, and clean Vite build (`npm run build`).
+- `Task R.7`: Completed project-wide "Lab Signal" sweep. Neutralized all remaining lab, synthetic, demo, and mode wording across `backend/app/models.py`, `backend/app/routes/auth.py`, `backend/app/routes/patients.py`, `backend/app/routes/staff.py`, `backend/app/schemas/patient.py`, `backend/app/seed.py`, and `frontend/src/components/ReportUploader.jsx` (removed sample generator button). Verified zero matches (`Total matches: 0`) with `grep -rniE "lab_|demo|dummy|synthetic|hackathon|educational|vulnerab" frontend/src frontend/index.html backend/app lab-data`, clean seeding with Python 3.11, and clean Vite production build (`npm run build`).
+- `Task R.6`: Audited and de-labeled reports management in `frontend/src/components/ReportUploader.jsx`, `frontend/src/pages/Reports.jsx`, and `backend/app/routes/reports.py`. Removed synthetic notice banners, test file alerts, and lab wording from upload dropzone, listing, and inspector modal. Updated default target patient ID to `PAT-100001`. Verified zero matches for demo/dummy/synthetic/test file, clean `npm run build`, and `201 Created` on file upload.
+- `Task R.5`: Audited and de-labeled UI copy in `frontend/src/pages/PatientDashboard.jsx` and `frontend/src/pages/MedicalProfile.jsx`. Removed synthetic clinical warnings, test ID card watermarks, and lab copy; updated identity schemes to production labels ("Identity & Scheme Details", "Aadhaar Reference", "Ayushman Bharat PM-JAY Ref") with invalid-by-construction numbers (`1002 4471 0001`, `PMJAY-0000-0001`). Replaced `aadhaar_demo_ref`/`ayushman_demo_ref` with `aadhaar_ref`/`ayushman_ref` across frontend and backend models/schemas. Verified zero matches for demo/dummy/synthetic/test data and clean `npm run build`.
+- `Task R.4`: Neutralized seed data and generated artifacts in `backend/app/seed.py` and `backend/app/models.py`. Renamed IDs to `PAT-100001`, `PAT-100002`, `STF-200001`, `STF-200002`, `ADM-300001` and emails to `@medivault.test`. Replaced test scheme IDs with invalid-by-construction numbers (`1002 4471 0001`, `PMJAY-0000-0001`). Removed diagonal watermarks and lab footers from generated PDFs; sanitized `backup_dump.sql`. Verified zero matches across database text columns and `lab-data/`.
+- `Task R.3`: De-labeled `frontend/src/pages/Auth.jsx` by removing quick-fill demo credential cards, synthetic testing warning banner, and lab/test copy. Replaced with clean production labels and placeholders ("Email Address", "Password", "name@example.com"). Verified zero matches for demo/synthetic/dummy/educational and clean `npm run build`.
+- `Task R.2`: Deleted `frontend/src/components/ModeBanner.jsx`, removed mode fetch/toggle logic and dual-mode cards from `frontend/src/App.jsx`, removed Lab badge and mode indicators from `frontend/src/components/Navbar.jsx`, updated `frontend/index.html` with neutral portal title/meta, and removed `modeApi` from `frontend/src/services/api.js`. Verified clean `npm run build` and zero mode references.
+- `Task R.1`: Removed `APP_MODE` and mode endpoints from `backend/app/config.py`, `backend/app/main.py`, `backend/app/routes/staff.py`, and `.env.example`. `GET /api/health` returns `{"status": "ok"}`, `/api/mode` returns 404, OpenAPI metadata set to neutral product copy.
+- `backend/app/config.py`: Exports `settings` (`Settings`) with `APP_MODE` (`LAB_VULNERABLE` default), `DATABASE_URL`, `SECRET_KEY`, `ALGORITHM`, `ACCESS_TOKEN_EXPIRE_MINUTES`, `UPLOAD_DIR`, and `BACKUP_DIR`.
+- `backend/app/database.py`: Exports `engine`, `SessionLocal`, `Base`, and `get_db` dependency for FastAPI routes. SQLite `check_same_thread=False` configured.
+- `backend/app/models.py`: Defined SQLAlchemy models `User`, `PatientProfile`, `IdentityRecord`, `MedicalReport`, `ConsentRecord`, and `AuditLog` with relationship mappings and synthetic healthcare fields.
+- `backend/app/seed.py`: Implemented synthetic seeder generating 5 demo accounts (`patient01`, `patient02`, `reception`, `doctor`, `privacy` with password `Password123!`), synthetic profiles, identity references, dummy `backup_dump.sql`, and watermarked PDFs in `lab-data/uploads/` and `lab-data/backups/`.
+- `backend/app/schemas/auth.py`: Created Pydantic DTOs `UserLogin`, `UserRegister`, `UserResponse`, `TokenResponse`, and `TokenData`.
+- `backend/app/routes/auth.py`: Implemented auth endpoints `POST /api/auth/register`, `POST /api/auth/login`, `GET /api/auth/me`, bcrypt password hashing/verification, and JWT access token creation/validation with `get_current_user` dependency.
+- `backend/app/schemas/patient.py`: Created schemas `PatientProfileResponse`, `PatientProfileUpdate`, and `IdentityRecordSchema`.
+- `backend/app/routes/patients.py`: Implemented patient endpoints `GET /api/patients/me`, `GET /api/patients/{patient_id}`, and `PUT /api/patients/{patient_id}` with automatic profile initialization and IdentityRecord synchronization.
+- `backend/app/schemas/report.py`: Created `MedicalReportResponse` schema.
+- `backend/app/routes/reports.py`: Implemented `GET /api/reports`, `GET /api/reports/{id}`, multipart `POST /api/reports/upload` saving documents to `lab-data/uploads/`, and authenticated document streaming `GET /api/reports/{id}/download`.
+- `backend/app/schemas/staff.py`: Created DTO schemas `StaffPatientListItem`, `StaffPatientDetailResponse`, and `StaffClinicalRecordResponse`.
+- `backend/app/routes/staff.py`: Implemented `GET /api/staff/patients` (directory search/list), `GET /api/staff/patients/{patient_id}` (record inspector with audit logging), `GET /api/staff/patients/{patient_id}/clinical` (mode-aware clinical access), and `require_staff_user` RBAC dependency.
+- `backend/app/main.py`: Mounted `auth_router`, `patients_router`, `reports_router`, and `staff_router`.
+- `frontend/src/services/api.js`: Added `reportsApi` (`listReports`, `getReport`, `uploadReport`, `getDownloadUrl`) along with `patientApi`, `authApi`, and `modeApi`.
+- `frontend/src/components/ReportUploader.jsx`: Drag-and-drop document upload modal with category selectors, synthetic disclaimer alerts, and one-click sample report generation.
+- `frontend/src/pages/Reports.jsx`: Diagnostic document vault featuring full-text search, category tabs, document inspection modal, and file download streaming.
+- `frontend/src/App.jsx`: Integrated `Reports` view into app shell routing and navigation links. Verified clean production build (`npm run build`).
+
 - **Known Issues / Blockers:** None
-- **Next Task:** Task 2.8: Frontend Staff / Admin Dashboard

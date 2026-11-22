@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import { Activity, Shield, Users, FileText, Lock, Menu, X } from 'lucide-react'
 
-export default function Navbar({ mode, currentUser, onOpenAuth, onLogout, activeView, onNavigate }) {
+export default function Navbar({ currentUser, onOpenAuth, onLogout, activeView, onNavigate }) {
   const [mobileOpen, setMobileOpen] = useState(false)
-  const isVulnerable = mode === 'LAB_VULNERABLE'
 
   const handleNav = (view) => {
     if (onNavigate) {
@@ -16,7 +15,7 @@ export default function Navbar({ mode, currentUser, onOpenAuth, onLogout, active
     <nav className="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo & Lab Branding */}
+          {/* Logo & Portal Branding */}
           <div
             className="flex items-center gap-3 cursor-pointer"
             onClick={() => handleNav('overview')}
@@ -27,11 +26,8 @@ export default function Navbar({ mode, currentUser, onOpenAuth, onLogout, active
             <div>
               <div className="flex items-center gap-2">
                 <span className="font-extrabold text-lg tracking-tight text-slate-900">MediVault</span>
-                <span className="text-[10px] font-semibold uppercase tracking-wider bg-sky-100 text-sky-800 px-1.5 py-0.5 rounded">
-                  Lab
-                </span>
               </div>
-              <p className="text-[11px] text-slate-500 font-medium">Healthcare Privacy & Security Prototype</p>
+              <p className="text-[11px] text-slate-500 font-medium">Healthcare Patient &amp; Clinical Portal</p>
             </div>
           </div>
 
@@ -88,25 +84,10 @@ export default function Navbar({ mode, currentUser, onOpenAuth, onLogout, active
             </button>
           </div>
 
-          {/* Right Status Badge & Auth Trigger */}
+          {/* Right Status / Auth Trigger */}
           <div className="hidden sm:flex items-center gap-3">
-            <div
-              className={`flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full border ${
-                isVulnerable
-                  ? 'bg-rose-50 text-rose-700 border-rose-200'
-                  : 'bg-emerald-50 text-emerald-700 border-emerald-200'
-              }`}
-            >
-              <span
-                className={`w-2 h-2 rounded-full ${
-                  isVulnerable ? 'bg-rose-500 animate-pulse' : 'bg-emerald-500'
-                }`}
-              />
-              <span>{isVulnerable ? 'Vulnerable Active' : 'Remediated Active'}</span>
-            </div>
-
             {currentUser ? (
-              <div className="flex items-center gap-2 pl-2 border-l border-slate-200">
+              <div className="flex items-center gap-2 pl-2">
                 <div className="text-right">
                   <div className="text-xs font-bold text-slate-800 leading-none truncate max-w-[130px]">
                     {currentUser.full_name || currentUser.email}
@@ -151,41 +132,41 @@ export default function Navbar({ mode, currentUser, onOpenAuth, onLogout, active
       {/* Mobile Drawer */}
       {mobileOpen && (
         <div className="md:hidden border-t border-slate-200 bg-slate-50 px-4 pt-2 pb-4 space-y-1">
-          <a
-            href="#overview"
-            onClick={() => setMobileOpen(false)}
-            className="block px-3 py-2 rounded-md text-base font-medium text-sky-600 hover:bg-white"
+          <button
+            type="button"
+            onClick={() => handleNav('overview')}
+            className="w-full text-left block px-3 py-2 rounded-md text-base font-medium text-sky-600 hover:bg-white"
           >
             Overview
-          </a>
-          <a
-            href="#patient-portal"
-            onClick={() => setMobileOpen(false)}
-            className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-white"
+          </button>
+          <button
+            type="button"
+            onClick={() => handleNav('patient-portal')}
+            className="w-full text-left block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-white"
           >
             Patient Portal
-          </a>
-          <a
-            href="#medical-reports"
-            onClick={() => setMobileOpen(false)}
-            className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-white"
+          </button>
+          <button
+            type="button"
+            onClick={() => handleNav('medical-reports')}
+            className="w-full text-left block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-white"
           >
             Medical Reports
-          </a>
-          <a
-            href="#privacy-centre"
-            onClick={() => setMobileOpen(false)}
-            className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-white"
+          </button>
+          <button
+            type="button"
+            onClick={() => handleNav('privacy-centre')}
+            className="w-full text-left block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-white"
           >
             Privacy Centre
-          </a>
-          <a
-            href="#staff-portal"
-            onClick={() => setMobileOpen(false)}
-            className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-white"
+          </button>
+          <button
+            type="button"
+            onClick={() => handleNav('staff-portal')}
+            className="w-full text-left block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-white"
           >
             Staff Portal
-          </a>
+          </button>
           <div className="pt-2 border-t border-slate-200 mt-2">
             {currentUser ? (
               <div className="flex items-center justify-between px-3 py-2">

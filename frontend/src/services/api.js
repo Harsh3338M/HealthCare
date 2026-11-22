@@ -3,7 +3,7 @@
  * 
  * Centralized HTTP client for interacting with the FastAPI backend.
  * Handles JWT token storage, request headers, error handling,
- * authentication, and dynamic security mode switching.
+ * and authentication.
  */
 
 const TOKEN_KEY = 'medivault_token'
@@ -146,12 +146,36 @@ export const reportsApi = {
   getDownloadUrl: (reportId) => `/api/reports/${reportId}/download`,
 }
 
-export const modeApi = {
-  getMode: () => apiRequest('/api/mode'),
-  toggleMode: (mode) =>
-    apiRequest('/api/mode', {
+export const staffApi = {
+  listPatients: (search) => {
+    const query = search ? `?search=${encodeURIComponent(search)}` : ''
+    return apiRequest(`/api/staff/patients${query}`)
+  },
+  getPatientRecord: (patientId) => apiRequest(`/api/staff/patients/${patientId}`),
+  getClinicalHistory: (patientId) => apiRequest(`/api/staff/patients/${patientId}/clinical`),
+  listAuditLogs: (limit = 50) => apiRequest(`/api/staff/audit-logs?limit=${limit}`),
+}
+
+export const privacyApi = {
+  getConsents: () => apiRequest('/api/privacy/consent'),
+  updateConsent: (purpose, isGranted, description) =>
+    apiRequest('/api/privacy/consent', {
       method: 'POST',
-      body: JSON.stringify(mode ? { mode } : {}),
+      body: JSON.stringify({
+        purpose,
+        is_granted: isGranted,
+        description,
+      }),
+    }),
+  submitRightsRequest: (data) =>
+    apiRequest('/api/privacy/rights-request', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+  submitGrievance: (data) =>
+    apiRequest('/api/privacy/grievance', {
+      method: 'POST',
+      body: JSON.stringify(data),
     }),
 }
 
@@ -159,7 +183,8 @@ const api = {
   auth: authApi,
   patient: patientApi,
   reports: reportsApi,
-  mode: modeApi,
+  staff: staffApi,
+  privacy: privacyApi,
   token: tokenService,
   request: apiRequest,
 }

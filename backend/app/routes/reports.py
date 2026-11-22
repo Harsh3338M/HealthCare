@@ -67,8 +67,8 @@ async def upload_medical_report(
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
-    """Upload a synthetic medical report, prescription, or lab document to lab-data/uploads/."""
-    target_patient_id = patient_id or current_user.patient_id or "PAT-DEMO-001"
+    """Upload a medical report, prescription, or clinical document to storage."""
+    target_patient_id = patient_id or current_user.patient_id or "PAT-100001"
 
     # Check for linked patient profile
     profile = (
@@ -123,7 +123,7 @@ def download_medical_report(
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
-    """Stream stored synthetic medical report file."""
+    """Stream stored medical report file."""
     report = db.query(MedicalReport).filter(MedicalReport.id == report_id).first()
     if not report:
         raise HTTPException(

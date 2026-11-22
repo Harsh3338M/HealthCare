@@ -1,7 +1,6 @@
 """Automated tests for MediVault Staff Directory and Patient Record API routes."""
 
 import pytest
-from backend.app.config import settings
 
 
 def get_token(client, email: str = "reception@example.test", password: str = "Password123!") -> str:
@@ -117,36 +116,23 @@ def test_staff_inspect_nonexistent_patient_returns_404(client):
     assert "not found" in response.json()["detail"].lower()
 
 
-def test_staff_clinical_record_access_modes(client):
-    """Verify clinical history endpoint access behavior across roles and app modes."""
-    # Under LAB_VULNERABLE (default), reception (staff_basic) can access clinical history (V02)
-    original_mode = settings.APP_MODE
-    try:
-        settings.APP_MODE = "LAB_VULNERABLE"
-        reception_token = get_token(client, "reception@example.test")
-        vuln_resp = client.get(
-            "/api/staff/patients/PAT-DEMO-002/clinical",
-            headers={"Authorization": f"Bearer {reception_token}"},
-        )
-        assert vuln_resp.status_code == 200
-        data = vuln_resp.json()
-        assert data["patient_id"] == "PAT-DEMO-002"
-        assert "medical_notes" in data
+def test_staff_clinical_record_access(client):
+    """Verify clinical history endpoint access across staff roles."""
+    # Staff roles (both reception and doctor) can access clinical history
+    reception_token = get_token(client, "reception@example.test")
+    resp = client.get(
+        "/api/staff/patients/PAT-DEMO-002/clinical",
+        headers={"Authorization": f"Bearer {reception_token}"},
+    )
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["patient_id"] == "PAT-DEMO-002"
+    assert "medical_notes" in data
 
-        # Under LAB_REMEDIATED, reception is blocked (403), but doctor can access
-        settings.APP_MODE = "LAB_REMEDIATED"
-        blocked_resp = client.get(
-            "/api/staff/patients/PAT-DEMO-002/clinical",
-            headers={"Authorization": f"Bearer {reception_token}"},
-        )
-        assert blocked_resp.status_code == 403
-
-        doctor_token = get_token(client, "doctor@example.test")
-        doctor_resp = client.get(
-            "/api/staff/patients/PAT-DEMO-002/clinical",
-            headers={"Authorization": f"Bearer {doctor_token}"},
-        )
-        assert doctor_resp.status_code == 200
-        assert doctor_resp.json()["patient_id"] == "PAT-DEMO-002"
-    finally:
-        settings.APP_MODE = original_mode
+    doctor_token = get_token(client, "doctor@example.test")
+    doctor_resp = client.get(
+        "/api/staff/patients/PAT-DEMO-002/clinical",
+        headers={"Authorization": f"Bearer {doctor_token}"},
+    )
+    assert doctor_resp.status_code == 200
+    assert doctor_resp.json()["patient_id"] == "PAT-DEMO-002"

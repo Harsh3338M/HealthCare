@@ -109,7 +109,7 @@ def get_current_user(
 
 @router.post("/register", response_model=TokenResponse, status_code=status.HTTP_201_CREATED)
 def register(payload: UserRegister, db: Session = Depends(get_db)):
-    """Register a new synthetic user, create initial profile, and return JWT token."""
+    """Register a new user account, create initial profile, and return JWT token."""
     cleaned_email = payload.email.strip().lower()
 
     # Check for existing user

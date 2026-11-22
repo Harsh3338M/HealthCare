@@ -24,8 +24,8 @@ class StaffPatientListItem(BaseModel):
     blood_group: Optional[str] = None
     allergies: Optional[str] = None
     conditions: Optional[str] = None
-    aadhaar_demo_ref: Optional[str] = None
-    ayushman_demo_ref: Optional[str] = None
+    aadhaar_ref: Optional[str] = None
+    ayushman_ref: Optional[str] = None
     is_active: bool = True
     reports_count: int = 0
     created_at: Optional[datetime] = None
@@ -50,8 +50,8 @@ class StaffPatientDetailResponse(BaseModel):
     conditions: Optional[str] = None
     medications: Optional[str] = None
     medical_notes: Optional[str] = None
-    aadhaar_demo_ref: Optional[str] = None
-    ayushman_demo_ref: Optional[str] = None
+    aadhaar_ref: Optional[str] = None
+    ayushman_ref: Optional[str] = None
     is_active: bool = True
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
@@ -70,6 +70,25 @@ class StaffClinicalRecordResponse(BaseModel):
     conditions: Optional[str] = None
     medications: Optional[str] = None
     medical_notes: Optional[str] = None
+    aadhaar_ref: Optional[str] = None
+    ayushman_ref: Optional[str] = None
     reports: List[MedicalReportResponse] = []
+
+    model_config = {"from_attributes": True}
+
+
+class StaffAuditLogResponse(BaseModel):
+    """System and staff audit activity event."""
+    id: int
+    actor_id: Optional[str] = None
+    actor_email: Optional[str] = None
+    action: str
+    endpoint: Optional[str] = None
+    target_resource_id: Optional[str] = None
+    ip_address: Optional[str] = None
+    status: str
+    status_code: Optional[int] = None
+    details: Optional[str] = None
+    timestamp: datetime
 
     model_config = {"from_attributes": True}

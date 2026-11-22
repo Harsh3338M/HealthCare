@@ -17,7 +17,6 @@ import {
   Clock,
   ArrowRight,
   ExternalLink,
-  ShieldAlert,
   ShieldCheck,
   RefreshCw,
   FolderOpen
@@ -25,7 +24,7 @@ import {
 import { patientApi } from '../services/api'
 import MedicalProfile from './MedicalProfile'
 
-export default function PatientDashboard({ currentUser, mode, onNavigate }) {
+export default function PatientDashboard({ currentUser, onNavigate }) {
   const [profile, setProfile] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -48,8 +47,6 @@ export default function PatientDashboard({ currentUser, mode, onNavigate }) {
     }
   }
 
-  const isVulnerable = mode === 'LAB_VULNERABLE'
-
   // Parse list helpers
   const allergyList = profile?.allergies
     ? profile.allergies.split(',').map((s) => s.trim()).filter(Boolean)
@@ -65,7 +62,7 @@ export default function PatientDashboard({ currentUser, mode, onNavigate }) {
     return (
       <div className="flex flex-col items-center justify-center py-20 space-y-4">
         <div className="w-10 h-10 border-4 border-sky-600 border-t-transparent rounded-full animate-spin" />
-        <p className="text-sm text-slate-500 font-medium">Retrieving synthetic patient profile...</p>
+        <p className="text-sm text-slate-500 font-medium">Loading patient profile...</p>
       </div>
     )
   }
@@ -82,10 +79,10 @@ export default function PatientDashboard({ currentUser, mode, onNavigate }) {
             <div>
               <div className="flex items-center gap-2.5 flex-wrap">
                 <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
-                  {profile?.full_name || 'Synthetic Patient'}
+                  {profile?.full_name || 'Patient Profile'}
                 </h1>
                 <span className="font-mono text-xs font-semibold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
-                  {profile?.patient_id || 'PAT-DEMO'}
+                  {profile?.patient_id || 'PAT-100001'}
                 </span>
                 <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-rose-50 text-rose-700 border border-rose-200">
                   Blood Group: {profile?.blood_group || 'B+'}
@@ -98,7 +95,7 @@ export default function PatientDashboard({ currentUser, mode, onNavigate }) {
                 </span>
                 <span className="flex items-center gap-1">
                   <Phone className="w-3.5 h-3.5 text-slate-400" />
-                  {profile?.phone || '+91-98765-43210'}
+                  {profile?.phone || '+91-011-2345-6789'}
                 </span>
                 <span className="flex items-center gap-1">
                   <Calendar className="w-3.5 h-3.5 text-slate-400" />
@@ -165,7 +162,6 @@ export default function PatientDashboard({ currentUser, mode, onNavigate }) {
         <MedicalProfile
           initialProfile={profile}
           onProfileUpdated={(updated) => setProfile(updated)}
-          mode={mode}
         />
       ) : (
         <div className="space-y-8">
@@ -260,27 +256,27 @@ export default function PatientDashboard({ currentUser, mode, onNavigate }) {
           <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h3 className="text-sm font-bold text-slate-900">National Health Schemes &amp; Identity Credentials</h3>
-                <p className="text-xs text-slate-500">Synthetic health identification references linked to this patient account</p>
+                <h3 className="text-sm font-bold text-slate-900">Identity &amp; Scheme Details</h3>
+                <p className="text-xs text-slate-500">Health identification and scheme references linked to this patient account</p>
               </div>
               <span className="text-[11px] font-semibold text-sky-700 bg-sky-50 px-2 py-0.5 rounded border border-sky-200">
-                Synthetic Records
+                Verified Schemes
               </span>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="p-4 rounded-xl border border-slate-200 bg-slate-50/70">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-slate-800">Synthetic Aadhaar Reference</span>
+                  <span className="text-xs font-bold text-slate-800">Aadhaar Reference</span>
                   <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded">
                     Verified
                   </span>
                 </div>
                 <div className="mt-2 font-mono text-sm font-extrabold text-slate-900">
-                  {profile?.aadhaar_demo_ref || 'DEMO-AADHAAR-0001'}
+                  {profile?.aadhaar_ref || '1002 4471 0001'}
                 </div>
                 <p className="mt-1 text-[11px] text-slate-500">
-                  Used in V03/V04 to simulate plaintext storage and data masking remediation.
+                  Government identity reference for patient verification and clinical records.
                 </p>
               </div>
 
@@ -292,10 +288,10 @@ export default function PatientDashboard({ currentUser, mode, onNavigate }) {
                   </span>
                 </div>
                 <div className="mt-2 font-mono text-sm font-extrabold text-slate-900">
-                  {profile?.ayushman_demo_ref || 'DEMO-PM-JAY-0001'}
+                  {profile?.ayushman_ref || 'PMJAY-0000-0001'}
                 </div>
                 <p className="mt-1 text-[11px] text-slate-500">
-                  National health insurance test scheme reference for tertiary hospitalization care.
+                  National health insurance scheme reference for secondary and tertiary care.
                 </p>
               </div>
             </div>

@@ -8,7 +8,6 @@ import {
   Eye,
   ExternalLink,
   Shield,
-  ShieldAlert,
   ShieldCheck,
   Calendar,
   User,
@@ -16,13 +15,12 @@ import {
   Lock,
   RefreshCw,
   X,
-  FileCheck2,
-  AlertTriangle
+  FileCheck2
 } from 'lucide-react'
 import { reportsApi } from '../services/api'
 import ReportUploader from '../components/ReportUploader'
 
-export default function Reports({ currentUser, mode, onNavigate }) {
+export default function Reports({ currentUser, onNavigate }) {
   const [reports, setReports] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -47,8 +45,6 @@ export default function Reports({ currentUser, mode, onNavigate }) {
       setLoading(false)
     }
   }
-
-  const isVulnerable = mode === 'LAB_VULNERABLE'
 
   // Filter logic
   const filteredReports = reports.filter((rep) => {
@@ -82,7 +78,7 @@ export default function Reports({ currentUser, mode, onNavigate }) {
                   Medical Reports &amp; Diagnostic Vault
                 </h1>
                 <p className="text-xs text-slate-500">
-                  Inspect, upload, and stream synthetic laboratory records, prescriptions, and radiology documents
+                  Inspect, upload, and download clinical laboratory records, prescriptions, and diagnostic documents
                 </p>
               </div>
             </div>
@@ -144,7 +140,7 @@ export default function Reports({ currentUser, mode, onNavigate }) {
       {loading ? (
         <div className="flex flex-col items-center justify-center py-20 space-y-4">
           <div className="w-10 h-10 border-4 border-sky-600 border-t-transparent rounded-full animate-spin" />
-          <p className="text-sm text-slate-500 font-medium">Loading synthetic diagnostic documents...</p>
+          <p className="text-sm text-slate-500 font-medium">Loading diagnostic documents...</p>
         </div>
       ) : filteredReports.length === 0 ? (
         <div className="bg-white rounded-2xl border border-slate-200 p-12 text-center space-y-4 shadow-sm">
@@ -153,15 +149,15 @@ export default function Reports({ currentUser, mode, onNavigate }) {
           </div>
           <h3 className="font-bold text-base text-slate-800">No Medical Reports Found</h3>
           <p className="text-xs text-slate-500 max-w-sm mx-auto leading-relaxed">
-            There are currently no reports matching your filter criteria. Use the button below to upload a sample
-            diagnostic test file.
+            There are currently no reports matching your filter criteria. Use the button below to upload a
+            diagnostic report document.
           </p>
           <button
             type="button"
             onClick={() => setShowUploader(true)}
             className="py-2 px-4 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-semibold text-xs shadow-xs"
           >
-            Upload Sample Diagnostic Report
+            Upload Diagnostic Document
           </button>
         </div>
       ) : (
@@ -192,7 +188,7 @@ export default function Reports({ currentUser, mode, onNavigate }) {
                 <div className="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400 font-mono">
                   <span>{formatFileSize(report.file_size)}</span>
                   <span>
-                    {report.created_at ? new Date(report.created_at).toLocaleDateString() : 'Synthetic'}
+                    {report.created_at ? new Date(report.created_at).toLocaleDateString() : 'Verified'}
                   </span>
                 </div>
               </div>
@@ -226,7 +222,7 @@ export default function Reports({ currentUser, mode, onNavigate }) {
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
           <div className="w-full max-w-xl my-8">
             <ReportUploader
-              patientId={currentUser?.patient_id || 'PAT-DEMO-001'}
+              patientId={currentUser?.patient_id || 'PAT-100001'}
               onUploadSuccess={() => {
                 fetchReports()
                 setShowUploader(false)
@@ -256,15 +252,6 @@ export default function Reports({ currentUser, mode, onNavigate }) {
               <div>
                 <h3 className="font-bold text-sm text-slate-900">{previewReport.title}</h3>
                 <p className="text-[11px] text-slate-500 font-mono">ID: {previewReport.id} • {previewReport.file_name}</p>
-              </div>
-            </div>
-
-            {/* Synthetic Disclaimer */}
-            <div className="bg-rose-50 border border-rose-200 rounded-xl p-3 flex items-start gap-2.5">
-              <AlertTriangle className="w-4 h-4 text-rose-600 flex-shrink-0 mt-0.5" />
-              <div className="text-[11px] text-rose-900 leading-relaxed">
-                <span className="font-bold">Synthetic Laboratory Document: </span>
-                This document is a local testing artifact watermarked for educational demonstrations.
               </div>
             </div>
 
