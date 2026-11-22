@@ -21,22 +21,22 @@ This document tracks sequential, atomic tasks derived from the MediVault Impleme
   - Description: Define ORM models for `User`, `PatientProfile`, `IdentityRecord`, `MedicalReport`, `ConsentRecord`, and `AuditLog` supporting dual-mode synthetic data fields.
   - Verification: Run `python -c "from backend.app.database import Base, engine; import backend.app.models; Base.metadata.create_all(bind=engine)"` to verify database table creation.
 
-- [ ] Task 1.4: Synthetic Data & Watermarked PDF Seeder
+- [x] Task 1.4: Synthetic Data & Watermarked PDF Seeder
   - Files: `backend/app/seed.py`
   - Description: Implement seed script generating 5 demo accounts (`patient01`, `patient02`, `reception`, `doctor`, `privacy`), synthetic medical records, dummy `backup_dump.sql`, and watermarked synthetic PDF reports in `lab-data/`.
   - Verification: Run `python -m backend.app.seed` and verify database records exist and files are created in `lab-data/uploads/` and `lab-data/backups/`.
 
-- [ ] Task 1.5: FastAPI Base Application & Mode Endpoints
+- [x] Task 1.5: FastAPI Base Application & Mode Endpoints
   - Files: `backend/app/main.py`
   - Description: Initialize FastAPI application with CORS middleware, health check endpoint (`GET /api/health`), and lab mode inspector/toggle endpoint (`GET /api/mode`, `POST /api/mode`).
   - Verification: Start FastAPI test server or execute `pytest` / curl to verify `GET /api/health` and `GET /api/mode` return 200 OK with `{"status": "ok", "app_mode": "LAB_VULNERABLE"}`.
 
-- [ ] Task 1.6: Frontend Vite + React + Tailwind Initialization
+- [x] Task 1.6: Frontend Vite + React + Tailwind Initialization
   - Files: `frontend/package.json`, `frontend/vite.config.js`, `frontend/tailwind.config.js`
   - Description: Initialize React frontend with Vite, Tailwind CSS, and essential icons/routing dependencies.
   - Verification: Run `npm run build` in `frontend/` to confirm clean compilation and asset generation.
 
-- [ ] Task 1.7: Frontend Mode Indicator Banner & App Shell
+- [x] Task 1.7: Frontend Mode Indicator Banner & App Shell
   - Files: `frontend/src/App.jsx`, `frontend/src/components/ModeBanner.jsx`, `frontend/src/components/Navbar.jsx`
   - Description: Build global navigation bar and educational top banner displaying the active `APP_MODE` (`LAB_VULNERABLE` in red/amber vs `LAB_REMEDIATED` in green) with quick toggle functionality.
   - Verification: Run `npm run build` in `frontend/` to confirm components compile cleanly without syntax or import errors.
@@ -45,32 +45,32 @@ This document tracks sequential, atomic tasks derived from the MediVault Impleme
 
 ## Phase 2: Core Healthcare Portal UI & API
 
-- [ ] Task 2.1: Authentication API Routes
+- [x] Task 2.1: Authentication API Routes
   - Files: `backend/app/schemas/auth.py`, `backend/app/routes/auth.py`, `backend/app/main.py`
   - Description: Implement user registration (`POST /api/auth/register`) and login (`POST /api/auth/login`) with role assignment and token generation; mount router in `main.py`.
   - Verification: Send POST request to `/api/auth/login` with seeded synthetic credentials; verify 200 response containing access token and user payload.
 
-- [ ] Task 2.2: Frontend Authentication Pages
+- [x] Task 2.2: Frontend Authentication Pages
   - Files: `frontend/src/pages/Auth.jsx`, `frontend/src/services/api.js`
   - Description: Build login and registration UI with quick demo-credential fill buttons (`patient01`, `doctor`, `reception`, etc.) and synthetic data educational warnings.
   - Verification: Run `npm run build` in `frontend/` to ensure authentication view and API client compile without errors.
 
-- [ ] Task 2.3: Patient Profile API Endpoints
+- [x] Task 2.3: Patient Profile API Endpoints
   - Files: `backend/app/schemas/patient.py`, `backend/app/routes/patients.py`, `backend/app/main.py`
   - Description: Implement endpoints `GET /api/patients/me`, `GET /api/patients/{id}`, and `PUT /api/patients/{id}` for retrieving and updating patient vitals, conditions, and dummy identity schemes.
   - Verification: Authenticate as `patient01` and send GET `/api/patients/me`; verify 200 OK returning synthetic patient profile details.
 
-- [ ] Task 2.4: Frontend Patient Dashboard & Profile Views
+- [x] Task 2.4: Frontend Patient Dashboard & Profile Views
   - Files: `frontend/src/pages/PatientDashboard.jsx`, `frontend/src/pages/MedicalProfile.jsx`
   - Description: Create unified patient dashboard displaying health summary, allergies, conditions, dummy identity card (Aadhaar/PM-JAY reference), and edit forms.
   - Verification: Run `npm run build` in `frontend/` to verify patient dashboard and profile components build cleanly.
 
-- [ ] Task 2.5: Medical Reports API Endpoints
+- [x] Task 2.5: Medical Reports API Endpoints
   - Files: `backend/app/routes/reports.py`, `backend/app/schemas/report.py`, `backend/app/main.py`
   - Description: Implement report listing (`GET /api/reports`) and multipart report upload (`POST /api/reports/upload`), storing uploaded synthetic documents in `lab-data/uploads/`.
   - Verification: Send POST request to `/api/reports/upload` with a synthetic test file; verify 201 Created and confirm file presence in `lab-data/uploads/`.
 
-- [ ] Task 2.6: Frontend Medical Reports Manager & Viewer
+- [x] Task 2.6: Frontend Medical Reports Manager & Viewer
   - Files: `frontend/src/components/ReportUploader.jsx`, `frontend/src/pages/Reports.jsx`
   - Description: Build file upload dropzone and synthetic lab report list with preview and download actions.
   - Verification: Run `npm run build` in `frontend/` to verify report upload and viewer components compile with no errors.

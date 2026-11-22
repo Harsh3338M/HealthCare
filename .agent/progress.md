@@ -1,12 +1,22 @@
 # MediVault — Progress Tracking
 
-- **Current Phase:** Phase 1
-- **Last Completed Task:** Task 1.3: SQLAlchemy Core Data Models
+- **Current Phase:** Phase 2
+- **Last Completed Task:** Task 2.6: Frontend Medical Reports Manager & Viewer
 - **Architectural Decisions & Deviations:**
   - `backend/app/config.py`: Exports `settings` (`Settings`) with `APP_MODE` (`LAB_VULNERABLE` default), `DATABASE_URL`, `SECRET_KEY`, `ALGORITHM`, `ACCESS_TOKEN_EXPIRE_MINUTES`, `UPLOAD_DIR`, and `BACKUP_DIR`.
   - `backend/app/database.py`: Exports `engine`, `SessionLocal`, `Base`, and `get_db` dependency for FastAPI routes. SQLite `check_same_thread=False` configured.
   - `backend/app/models.py`: Defined SQLAlchemy models `User`, `PatientProfile`, `IdentityRecord`, `MedicalReport`, `ConsentRecord`, and `AuditLog` with relationship mappings and synthetic healthcare fields.
-  - `.venv`: Configured virtual environment with Python 3.11 and backend dependencies.
-  - `.agent/vulnerability.md`: Documented all 12 vulnerabilities (V01–V12), technical attack vectors, and remediation specifications.
+  - `backend/app/seed.py`: Implemented synthetic seeder generating 5 demo accounts (`patient01`, `patient02`, `reception`, `doctor`, `privacy` with password `Password123!`), synthetic profiles, identity references, dummy `backup_dump.sql`, and watermarked PDFs in `lab-data/uploads/` and `lab-data/backups/`.
+  - `backend/app/schemas/auth.py`: Created Pydantic DTOs `UserLogin`, `UserRegister`, `UserResponse`, `TokenResponse`, and `TokenData`.
+  - `backend/app/routes/auth.py`: Implemented auth endpoints `POST /api/auth/register`, `POST /api/auth/login`, `GET /api/auth/me`, bcrypt password hashing/verification, and JWT access token creation/validation with `get_current_user` dependency.
+  - `backend/app/schemas/patient.py`: Created schemas `PatientProfileResponse`, `PatientProfileUpdate`, and `IdentityRecordSchema`.
+  - `backend/app/routes/patients.py`: Implemented patient endpoints `GET /api/patients/me`, `GET /api/patients/{patient_id}`, and `PUT /api/patients/{patient_id}` with automatic profile initialization and IdentityRecord synchronization.
+  - `backend/app/schemas/report.py`: Created `MedicalReportResponse` schema.
+  - `backend/app/routes/reports.py`: Implemented `GET /api/reports`, `GET /api/reports/{id}`, multipart `POST /api/reports/upload` saving documents to `lab-data/uploads/`, and authenticated document streaming `GET /api/reports/{id}/download`.
+  - `backend/app/main.py`: Mounted `auth_router`, `patients_router`, and `reports_router`.
+  - `frontend/src/services/api.js`: Added `reportsApi` (`listReports`, `getReport`, `uploadReport`, `getDownloadUrl`) along with `patientApi`, `authApi`, and `modeApi`.
+  - `frontend/src/components/ReportUploader.jsx`: Drag-and-drop document upload modal with category selectors, synthetic disclaimer alerts, and one-click sample report generation.
+  - `frontend/src/pages/Reports.jsx`: Diagnostic document vault featuring full-text search, category tabs, document inspection modal, and file download streaming.
+  - `frontend/src/App.jsx`: Integrated `Reports` view into app shell routing and navigation links. Verified clean production build (`npm run build`).
 - **Known Issues / Blockers:** None
-- **Next Task:** Task 1.4: Synthetic Data & Watermarked PDF Seeder
+- **Next Task:** Task 2.7: Staff Patient Directory API

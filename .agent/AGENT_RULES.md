@@ -27,13 +27,15 @@ You are operating as a disciplined, deterministic software engineer. Your primar
 - **Bounded Logs:** Keep `progress.md` concise. Log only completed task IDs, critical file paths/exports created, architectural decisions, and active blockers. Prune resolved issues.
 
 ---
-
-## 4. Mandatory Verification & Definition of Done
+## 4. Mandatory Verification, Host Execution & Definition of Done
 A task is NOT complete until all steps below are satisfied:
-1. **Code Written:** Implementation matches `plan.md` conventions and types.
-2. **Self-Verification Executed:** Run the task's verification command (e.g., typecheck, linter, unit test, or build check).
-3. **Zero Regressions:** Fix all compiler, linter, or test errors introduced by your changes before finishing. If a fix requires more than 2 attempts, stop, document the error in `progress.md`, and ask for guidance.
-4. **State Updated:**
+1. **Run Installations & Verifications Outside Sandbox:** Whenever running package installations (`pip`, `uv`, `npm`), builds, database migrations, or API/server verifications, execute the terminal command **outside the sandbox** (request unsandboxed/host permissions) so loopback networking, local ports, and package registries do not stall or time out.
+2. **In-Process API Testing (No Live Servers):** NEVER start a live server (`uvicorn`, `npm run dev`, `vite`) or `curl` a live port to verify auth or API routes. Verify FastAPI endpoints strictly via in-process `fastapi.testclient.TestClient` (or `pytest` with an in-memory SQLite/mocked DB dependency override) with a hard timeout (`timeout 15s pytest ...`).
+3. **Non-Interactive Commands Only:** Always pass non-interactive flags (`-y`, `--yes`, `--no-interactive`, `--no-audit --no-fund`) when running CLIs or package managers. Verify frontends with `npm run build` or `npx tsc --noEmit`.
+4. **Zero Regressions:** Fix all compiler, linter, or test errors introduced by your changes before finishing. If a fix requires more than 2 attempts, stop, document the error in `progress.md`, and ask for guidance.
+5. **State Updated:**
    - Mark the completed task as `[x]` in `tasks.md`.
    - Update `progress.md` with the completed task ID, key artifacts/exports, and the next task ID.
-5. **Hard Stop:** Cease execution immediately after updating `progress.md` and await the next prompt.
+6. **Hard Stop:** Cease execution immediately after updating `progress.md` and await the next prompt.
+
+- **Never Run Blocking Servers Directly:** NEVER run long-lived foreground processes (`uvicorn`, `npm run dev`, `vite`, `--watch`) as a verification command. Always verify servers using `TestClient` / unit tests, or start in the background (`&`), hit the endpoint with `curl --max-time 5`, and kill the PID in the same command.
