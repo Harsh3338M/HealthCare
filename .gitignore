@@ -1,0 +1,95 @@
+# ==============================================================================
+# MediVault - Git Ignore Rules
+# Sensitive, temporary, local runtime, and build files not for GitHub
+# ==============================================================================
+
+# Agent & AI Workflow Metadata
+.agent/
+
+# Environment Variables & Secret Tokens
+.env
+.env.local
+.env.*.local
+*.env
+token.json
+token_*.json
+
+# Application & Audit Logs
+*.log
+backend/app.log
+
+# Databases & SQLite Storage
+*.db
+*.sqlite
+*.sqlite3
+medivault.db
+test_medivault.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Local Generated Clinical Data & Backups
+lab-data/uploads/*
+lab-data/backups/*
+!lab-data/uploads/.gitkeep
+!lab-data/backups/.gitkeep
+
+# Python Bytecode, Caches & Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Testing & Coverage Artifacts
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+
+# Node.js, Frontend Dependencies & Production Builds
+node_modules/
+frontend/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+frontend/dist/
+dist/
+.vite/
+frontend/.vite/
+
+# Local Utility Scripts
+python.cmd
+timeout.cmd
+
+# Operating System & Editor Artifacts
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
