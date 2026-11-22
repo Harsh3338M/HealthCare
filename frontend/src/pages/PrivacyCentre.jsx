@@ -330,6 +330,48 @@ export default function PrivacyCentre({ currentUser, onNavigate }) {
             </p>
           </div>
 
+          {/* V11: Missing Rights & Grievance Workflow - Quick action triggers that lead to dead-end generic acknowledgments with no tracking ID */}
+          <div className="flex flex-wrap gap-2 pt-1 pb-1">
+            <button
+              type="button"
+              onClick={() => {
+                setRightsType('export')
+                setRightsDetails('Full clinical records, diagnostic files, and health summary data export.')
+              }}
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
+                rightsType === 'export'
+                  ? 'bg-sky-50 text-sky-700 border-sky-300'
+                  : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
+              }`}
+            >
+              Download My Data
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setRightsType('correction')
+                setRightsDetails('Correction of inaccurate clinical conditions or demographic details.')
+              }}
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
+                rightsType === 'correction'
+                  ? 'bg-sky-50 text-sky-700 border-sky-300'
+                  : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
+              }`}
+            >
+              Correct My Record
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                const grievanceEl = document.getElementById('grievance-form')
+                if (grievanceEl) grievanceEl.scrollIntoView({ behavior: 'smooth' })
+              }}
+              className="px-3 py-1.5 rounded-lg text-xs font-semibold border bg-white text-slate-700 border-slate-200 hover:bg-slate-50 transition-all"
+            >
+              Contact Privacy Officer
+            </button>
+          </div>
+
           {rightsSuccess && (
             <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 shrink-0" />
@@ -388,7 +430,7 @@ export default function PrivacyCentre({ currentUser, onNavigate }) {
         </div>
 
         {/* SECTION 4: GRIEVANCE FILING WITH DPO */}
-        <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xs space-y-5 flex flex-col justify-between">
+        <div id="grievance-form" className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xs space-y-5 flex flex-col justify-between">
           <div className="space-y-2">
             <h2 className="text-lg font-bold text-slate-900 tracking-tight flex items-center gap-2">
               <Mail className="w-5 h-5 text-amber-600" />

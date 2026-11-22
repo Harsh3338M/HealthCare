@@ -155,6 +155,7 @@ export const staffApi = {
   getPatientRecord: (patientId) => apiRequest(`/api/staff/patients/${patientId}`),
   getClinicalHistory: (patientId) => apiRequest(`/api/staff/patients/${patientId}/clinical`),
   listAuditLogs: (limit = 50) => apiRequest(`/api/staff/audit-logs?limit=${limit}`),
+  getSecurityIncident: (incidentId) => apiRequest(`/api/staff/security/incidents/${incidentId}`),
 }
 
 export const privacyApi = {
@@ -177,6 +178,10 @@ export const privacyApi = {
     apiRequest('/api/privacy/grievance', {
       method: 'POST',
       body: JSON.stringify(data),
+    }),
+  deleteAccount: () =>
+    apiRequest('/api/privacy/account', {
+      method: 'DELETE',
     }),
 }
 

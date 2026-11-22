@@ -54,3 +54,9 @@ class GrievanceResponse(BaseModel):
     """Acknowledgment response for privacy grievance submission."""
     status: str
     message: str
+
+
+class AccountDeletionResponse(BaseModel):
+    """Acknowledgment response for account deletion request."""
+    status: str
+    message: str

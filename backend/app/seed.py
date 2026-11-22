@@ -456,6 +456,30 @@ def seed_database() -> None:
                 status_code=200,
                 details="MediVault healthcare services initialized.",
             ),
+            # V12: Incomplete Breach-Response Workflow - Seeded security alert for unusual access
+            # Read operations lack target_resource_id so the alert cannot correlate which patient records were accessed
+            AuditLog(
+                actor_id="198.51.100.42",
+                actor_email="anonymous@external-client",
+                action="BULK_RECORD_QUERY",
+                endpoint="/api/staff/patients",
+                target_resource_id=None,  # V12: Omitted target_resource_id prevents incident correlation
+                ip_address="198.51.100.42",
+                status="SUCCESS",
+                status_code=200,
+                details="Rapid sequential access across patient registry from external host.",
+            ),
+            AuditLog(
+                actor_id="198.51.100.42",
+                actor_email="anonymous@external-client",
+                action="UNUSUAL_ACCESS_DETECTED",
+                endpoint="/api/staff/patients",
+                target_resource_id=None,  # V12: Alert lacks correlated target_resource_id
+                ip_address="198.51.100.42",
+                status="BREACH_ALERT",
+                status_code=403,
+                details="Unusual access detected: Rapid sequential queries across patient directory from external IP.",
+            ),
             AuditLog(
                 actor_id="STF-200002",
                 actor_email="doctor@medivault.test",

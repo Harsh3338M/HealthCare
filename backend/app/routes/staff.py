@@ -14,6 +14,7 @@ from backend.app.database import get_db
 from backend.app.models import AuditLog, PatientProfile, User
 from backend.app.routes.auth import get_current_user
 from backend.app.schemas.staff import (
+    SecurityIncidentResponse,
     StaffAuditLogResponse,
     StaffClinicalRecordResponse,
     StaffPatientDetailResponse,
@@ -150,3 +151,47 @@ def list_audit_logs(
         .all()
     )
     return [StaffAuditLogResponse.model_validate(log) for log in logs]
+
+
+# V12: Incomplete Breach-Response Workflow - Security incident detail view cannot correlate
+# the alert to specific patient records accessed (audit entries lack target_resource_id)
+# and offers no user notification workflow.
+@router.get("/security/incidents/{incident_id}", response_model=SecurityIncidentResponse)
+def get_security_incident_detail(
+    incident_id: int,
+    current_user: User = Depends(require_staff_user),
+    db: Session = Depends(get_db),
+):
+    """V12: Retrieve security incident details showing uncorrelated patient records and missing notification workflow."""
+    log = db.query(AuditLog).filter(AuditLog.id == incident_id).first()
+    if not log:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Security incident '{incident_id}' not found",
+        )
+
+    # V12: Query correlated records by target_resource_id. Because audit entries for this
+    # access sequence omit target_resource_id (None), 0 correlated records are found.
+    correlated = []
+    if log.target_resource_id:
+        correlated = (
+            db.query(PatientProfile.patient_id)
+            .filter(PatientProfile.patient_id == log.target_resource_id)
+            .all()
+        )
+
+    return SecurityIncidentResponse(
+        id=log.id,
+        incident_type=log.action,
+        severity="High" if log.status == "BREACH_ALERT" else "Medium",
+        description=log.details or "Security access alert detected.",
+        timestamp=log.timestamp,
+        actor_id=log.actor_id,
+        ip_address=log.ip_address,
+        target_resource_id=log.target_resource_id,
+        correlated_records_count=len(correlated),
+        affected_patients=[c[0] for c in correlated],
+        notification_workflow_status="Unavailable: No notification dispatch channel configured",
+        remediation_status="Pending manual investigation",
+    )
+

@@ -11,9 +11,10 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from backend.app.database import get_db
-from backend.app.models import AuditLog, ConsentRecord, User
+from backend.app.models import AuditLog, ConsentRecord, PatientProfile, User
 from backend.app.routes.auth import get_current_user
 from backend.app.schemas.privacy import (
+    AccountDeletionResponse,
     ConsentItemResponse,
     ConsentUpdateRequest,
     GrievancePayload,
@@ -153,16 +154,18 @@ def update_consent_preference(
     return [ConsentItemResponse.model_validate(c) for c in all_consents]
 
 
+# V11: Missing Rights & Grievance Workflow - Handlers return generic acknowledgement
+# with no tracking ID, no ticket persistence, no database storage, and no downstream follow-up
 @router.post("/rights-request", response_model=RightsRequestResponse, status_code=status.HTTP_200_OK)
 def submit_rights_request(
     payload: RightsRequestPayload,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
-    """Submit a Data Principal rights request (data export, correction, or erasure)."""
+    """V11: Dead-end rights request handler with no tracking ID or workflow storage."""
     patient_id = current_user.patient_id or f"USR-{current_user.id}"
 
-    # Log rights request submission
+    # V11: Writes an audit row but creates no ticket, no request record, and issues no tracking ID
     audit = AuditLog(
         actor_id=patient_id,
         actor_email=current_user.email,
@@ -176,6 +179,7 @@ def submit_rights_request(
     db.add(audit)
     db.commit()
 
+    # V11: Generic acknowledgement with no tracking ID, no storage, no follow-up
     return RightsRequestResponse(
         status="received",
         request_type=payload.request_type,
@@ -189,9 +193,10 @@ def submit_grievance(
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
-    """File a formal privacy grievance or inquiry with the Data Protection Officer."""
+    """V11: Dead-end grievance submission with no ticket generation, storage, or follow-up."""
     patient_id = current_user.patient_id or f"USR-{current_user.id}"
 
+    # V11: Writes an audit row but generates no grievance ticket and dispatches no alert
     audit = AuditLog(
         actor_id=patient_id,
         actor_email=payload.contact_email or current_user.email,
@@ -205,7 +210,47 @@ def submit_grievance(
     db.add(audit)
     db.commit()
 
+    # V11: Generic acknowledgement with no tracking ID, no follow-up
     return GrievanceResponse(
         status="received",
         message="Your privacy grievance has been registered with the Data Protection Officer. You will receive an acknowledgment notice regarding your inquiry.",
     )
+
+
+# V09: Excessive / Undefined Data Retention - Account deletion only marks is_active=False
+# Patient rows, identity records, medical reports, and filesystem files are never purged
+@router.delete("/account", response_model=AccountDeletionResponse)
+def delete_user_account(
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """V09: Soft-delete account by marking is_active=False without purging DB records or files."""
+    current_user.is_active = False
+
+    patient_id = current_user.patient_id or f"USR-{current_user.id}"
+    profile = (
+        db.query(PatientProfile)
+        .filter((PatientProfile.user_id == current_user.id) | (PatientProfile.patient_id == patient_id))
+        .first()
+    )
+    if profile:
+        profile.is_active = False
+
+    audit = AuditLog(
+        actor_id=patient_id,
+        actor_email=current_user.email,
+        action="DELETE_ACCOUNT",
+        endpoint="/api/privacy/account",
+        target_resource_id=patient_id,
+        status="SUCCESS",
+        status_code=200,
+        details="User account deletion requested. Account set to inactive; medical records and files retained.",
+    )
+    db.add(audit)
+    db.commit()
+
+    return AccountDeletionResponse(
+        status="deactivated",
+        message="Your account has been deactivated and scheduled for deletion.",
+    )
+

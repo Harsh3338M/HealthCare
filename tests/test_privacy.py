@@ -86,3 +86,30 @@ def test_unauthenticated_privacy_requests_rejected(client):
 
     resp2 = client.post("/api/privacy/rights-request", json={"request_type": "export"})
     assert resp2.status_code == 401
+
+
+def test_v09_soft_delete_retains_data(client):
+    """V09: Verify DELETE /api/privacy/account only soft-deletes and retains records."""
+    token = get_token(client, email="patient01@example.test")
+    headers = {"Authorization": f"Bearer {token}"}
+
+    # 1. Execute DELETE /api/privacy/account
+    resp = client.delete("/api/privacy/account", headers=headers)
+    assert resp.status_code == 200
+    assert resp.json()["status"] == "deactivated"
+
+    # 2. Deactivated user token is rejected with 403 Forbidden
+    me_resp = client.get("/api/patients/me", headers=headers)
+    assert me_resp.status_code == 403
+
+    # 3. Patient data remains intact in the system (retained indefinitely)
+    doctor_token = get_token(client, email="doctor@example.test")
+    staff_headers = {"Authorization": f"Bearer {doctor_token}"}
+    record_resp = client.get("/api/staff/patients/PAT-DEMO-001", headers=staff_headers)
+    assert record_resp.status_code == 200
+    record_data = record_resp.json()
+    assert record_data["patient_id"] == "PAT-DEMO-001"
+    assert record_data["full_name"] == "Aarav Sharma"
+    assert record_data["conditions"] == "Type-2 Diabetes"
+
+

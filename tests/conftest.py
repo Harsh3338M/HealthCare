@@ -17,7 +17,7 @@ from sqlalchemy.pool import StaticPool
 
 from backend.app.database import Base, get_db
 from backend.app.main import app
-from backend.app.models import IdentityRecord, PatientProfile, User
+from backend.app.models import AuditLog, IdentityRecord, PatientProfile, User
 from backend.app.routes.auth import hash_password
 
 test_engine = create_engine(
@@ -153,6 +153,20 @@ def reset_db_data():
         is_active=True,
     )
     db.add(user_privacy)
+
+    # Seed breach alert for V12
+    alert_log = AuditLog(
+        actor_id="198.51.100.42",
+        actor_email="anonymous@external-client",
+        action="UNUSUAL_ACCESS_DETECTED",
+        endpoint="/api/staff/patients",
+        target_resource_id=None,
+        ip_address="198.51.100.42",
+        status="BREACH_ALERT",
+        status_code=403,
+        details="Unusual access detected: Rapid sequential queries across patient directory from external IP.",
+    )
+    db.add(alert_log)
 
     db.commit()
     db.close()

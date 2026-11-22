@@ -12,6 +12,7 @@ import {
   ArrowRight
 } from 'lucide-react'
 import { authApi } from '../services/api'
+import ConsentModal from '../components/ConsentModal'
 
 export default function Auth({ onSuccess, onClose }) {
   const [isLogin, setIsLogin] = useState(true)
@@ -19,6 +20,11 @@ export default function Auth({ onSuccess, onClose }) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [successMsg, setSuccessMsg] = useState(null)
+
+  // V10: Dark-Pattern Privacy Notice & Consent UX - Pre-checked bundled consents
+  const [showConsentModal, setShowConsentModal] = useState(false)
+  const [consentsBundled, setConsentsBundled] = useState(true)
+  const [consentsThirdParty, setConsentsThirdParty] = useState(true)
 
   // Login form state
   const [email, setEmail] = useState('')
@@ -261,6 +267,58 @@ export default function Auth({ onSuccess, onClose }) {
             </div>
           )}
 
+          {!isLogin && (
+            <div className="space-y-3 pt-2 pb-1 border-t border-slate-100">
+              {/* V10: Dark-Pattern Privacy Notice & Consent UX - Pre-checked bundled consents */}
+              <div className="flex items-start gap-2.5">
+                <input
+                  id="bundled-consent"
+                  type="checkbox"
+                  checked={consentsBundled}
+                  onChange={(e) => setConsentsBundled(e.target.checked)}
+                  className="mt-0.5 w-4 h-4 text-sky-600 rounded border-slate-300 focus:ring-sky-500"
+                />
+                <label htmlFor="bundled-consent" className="text-xs text-slate-600 leading-relaxed cursor-pointer">
+                  <span className="font-semibold text-slate-800">Bundled Health Data Processing:</span> I consent to the collection, aggregation, and processing of my medical vitals, diagnostic reports, and identity references for service improvement and system coordination.{' '}
+                  <button
+                    type="button"
+                    onClick={() => setShowConsentModal(true)}
+                    className="text-sky-600 hover:underline font-medium inline"
+                  >
+                    Review Agreement
+                  </button>
+                </label>
+              </div>
+
+              <div className="flex items-start gap-2.5">
+                <input
+                  id="third-party-consent"
+                  type="checkbox"
+                  checked={consentsThirdParty}
+                  onChange={(e) => setConsentsThirdParty(e.target.checked)}
+                  className="mt-0.5 w-4 h-4 text-sky-600 rounded border-slate-300 focus:ring-sky-500"
+                />
+                <label htmlFor="third-party-consent" className="text-xs text-slate-600 leading-relaxed cursor-pointer">
+                  <span className="font-semibold text-slate-800">Partner &amp; Analytics Sharing:</span> I agree to share diagnostic records with affiliated healthcare networks and commercial analytics partners for clinical evaluation.
+                </label>
+              </div>
+
+              {/* V10: Visually buried, low-contrast, non-functional withdraw control */}
+              <div className="pt-1 text-center">
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    // V10: Non-functional revoke control does nothing
+                  }}
+                  className="text-[10px] text-slate-300 hover:text-slate-300 cursor-default select-none"
+                >
+                  Revoke all data processing consent choices
+                </button>
+              </div>
+            </div>
+          )}
+
           <button
             type="submit"
             disabled={loading}
@@ -277,6 +335,17 @@ export default function Auth({ onSuccess, onClose }) {
           </button>
         </form>
       </div>
+
+      {/* Consent Modal Dialog */}
+      <ConsentModal
+        isOpen={showConsentModal}
+        onClose={() => setShowConsentModal(false)}
+        onAccept={(preferences) => {
+          setConsentsBundled(true)
+          setConsentsThirdParty(preferences?.partnerSharing ?? true)
+          setShowConsentModal(false)
+        }}
+      />
     </div>
   )
 }

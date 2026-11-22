@@ -203,27 +203,27 @@ All flaws are **always active** — no mode flag, no conditional branches, no UI
   - Description: Issue non-expiring JWTs signed with a hardcoded secret, accept trivial passwords (e.g. `123`), and persist the token in `localStorage`.
   - Verification: Register with password `123`; decoded token has no `exp`; token is visible in browser `localStorage`.
 
-- [ ] Task 3.8: V08 - Sensitive Data in Application Logs
+- [x] Task 3.8: V08 - Sensitive Data in Application Logs
   - Files: `backend/app/main.py`
   - Description: A request-logging middleware writes full raw request bodies, query strings and `Authorization` headers to `backend/app.log`.
   - Verification: Perform a login and a profile update; `backend/app.log` contains the plaintext password, token and identity reference.
 
-- [ ] Task 3.9: V09 - Excessive / Undefined Data Retention
+- [x] Task 3.9: V09 - Excessive / Undefined Data Retention
   - Files: `backend/app/routes/privacy.py`
   - Description: `DELETE /api/privacy/account` and consent withdrawal only set an `is_active`/`deleted_at` flag; patient rows, identity records and report files are never purged and there is no retention schedule.
   - Verification: After `DELETE /api/privacy/account`, the patient row and report files still exist unchanged.
 
-- [ ] Task 3.10: V10 - Dark-Pattern Privacy Notice & Consent UX
+- [x] Task 3.10: V10 - Dark-Pattern Privacy Notice & Consent UX
   - Files: `frontend/src/components/ConsentModal.jsx`, `frontend/src/pages/Auth.jsx`
   - Description: Registration shows bundled, pre-checked consent boxes with vague purpose text; the withdraw/revoke control is visually buried and non-functional.
   - Verification: Open registration; consent boxes are pre-checked and bundled; the revoke control is low-contrast and does nothing.
 
-- [ ] Task 3.11: V11 - Missing Rights & Grievance Workflow
+- [x] Task 3.11: V11 - Missing Rights & Grievance Workflow
   - Files: `backend/app/routes/privacy.py`, `frontend/src/pages/PrivacyCentre.jsx`
   - Description: "Download My Data", "Correct My Record" and "Contact Privacy Officer" submit to handlers that return a generic acknowledgement (or 404/500) with no tracking ID, no storage and no follow-up.
   - Verification: Submit an export request and a grievance; neither returns a tracking ID and nothing is persisted.
 
-- [ ] Task 3.12: V12 - Incomplete Breach-Response Workflow
+- [x] Task 3.12: V12 - Incomplete Breach-Response Workflow
   - Files: `backend/app/routes/staff.py`, `backend/app/seed.py`, `frontend/src/pages/StaffDashboard.jsx`
   - Description: Seed a realistic "Unusual access detected" security alert in the staff panel. The incident detail view cannot correlate the alert to the specific patient records accessed (audit entries lack `target_resource_id` for those reads) and offers no notification workflow.
   - Verification: Open the alert in the staff panel; it shows "0 correlated patient records" and no way to notify affected users.

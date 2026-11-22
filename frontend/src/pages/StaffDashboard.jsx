@@ -21,7 +21,8 @@ import {
   Phone,
   Mail,
   Calendar,
-  LogIn
+  LogIn,
+  X
 } from 'lucide-react'
 import { staffApi } from '../services/api'
 import PatientRecordDrawer from '../components/PatientRecordDrawer'
@@ -36,6 +37,10 @@ export default function StaffDashboard({ currentUser, onNavigate, onOpenAuth }) 
   const [activeTab, setActiveTab] = useState('directory') // 'directory' | 'security-feed'
   const [logFilter, setLogFilter] = useState('ALL') // 'ALL' | 'SUCCESS' | 'ALERTS'
   const [error, setError] = useState(null)
+
+  // V12: Incident detail state
+  const [selectedIncident, setSelectedIncident] = useState(null)
+  const [loadingIncident, setLoadingIncident] = useState(false)
 
   // Verify staff role privileges
   const isStaffUser =
@@ -94,6 +99,34 @@ export default function StaffDashboard({ currentUser, onNavigate, onOpenAuth }) 
       return log.status === 'BREACH_ALERT' || log.status === 'UNAUTHORIZED' || log.status === 'FAILED'
     return true
   })
+
+  // V12: Incomplete Breach-Response Workflow - Locate breach alert and fetch incident detail
+  const breachAlert = auditLogs.find((l) => l.status === 'BREACH_ALERT')
+
+  const handleOpenIncident = async (log) => {
+    setLoadingIncident(true)
+    try {
+      const detail = await staffApi.getSecurityIncident(log.id)
+      setSelectedIncident(detail)
+    } catch (err) {
+      setSelectedIncident({
+        id: log.id,
+        incident_type: log.action,
+        severity: 'High',
+        description: log.details || 'Unusual access detected: Rapid sequential queries across patient directory from external IP.',
+        timestamp: log.timestamp,
+        actor_id: log.actor_id,
+        ip_address: log.ip_address,
+        target_resource_id: log.target_resource_id,
+        correlated_records_count: 0,
+        affected_patients: [],
+        notification_workflow_status: 'Unavailable: No notification dispatch channel configured',
+        remediation_status: 'Pending manual investigation',
+      })
+    } finally {
+      setLoadingIncident(false)
+    }
+  }
 
   // Role Badge Helper
   const renderRoleBadge = () => {
@@ -468,6 +501,32 @@ export default function StaffDashboard({ currentUser, onNavigate, onOpenAuth }) 
             </span>
           </div>
 
+          {/* V12: Incomplete Breach-Response Workflow - Seeded Unusual Access Security Alert Banner */}
+          {breachAlert && (
+            <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-rose-950">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-xl bg-rose-600 text-white flex items-center justify-center shrink-0">
+                  <ShieldAlert className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="font-bold text-sm text-rose-950">
+                    Security Alert: Unusual access detected
+                  </div>
+                  <p className="text-rose-700 text-[11px]">
+                    {breachAlert.details || 'Anomaly in access frequency across patient directory from external host.'}
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => handleOpenIncident(breachAlert)}
+                className="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs shrink-0 transition-colors shadow-xs"
+              >
+                Inspect Incident Details
+              </button>
+            </div>
+          )}
+
           {loadingLogs ? (
             <div className="py-16 flex flex-col items-center justify-center space-y-3">
               <div className="w-6 h-6 border-2 border-slate-800 border-t-transparent rounded-full animate-spin" />
@@ -532,8 +591,19 @@ export default function StaffDashboard({ currentUser, onNavigate, onOpenAuth }) 
                       </div>
                     </div>
 
-                    <div className="text-right shrink-0 text-[11px] text-slate-400 font-mono">
-                      {log.timestamp ? new Date(log.timestamp).toLocaleString() : 'Recent'}
+                    <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-2 shrink-0">
+                      <div className="text-[11px] text-slate-400 font-mono">
+                        {log.timestamp ? new Date(log.timestamp).toLocaleString() : 'Recent'}
+                      </div>
+                      {isAlert && (
+                        <button
+                          type="button"
+                          onClick={() => handleOpenIncident(log)}
+                          className="px-2.5 py-1 rounded-lg bg-rose-100 hover:bg-rose-600 text-rose-800 hover:text-white font-bold text-[11px] transition-colors"
+                        >
+                          Inspect Incident
+                        </button>
+                      )}
                     </div>
                   </div>
                 )
@@ -550,6 +620,87 @@ export default function StaffDashboard({ currentUser, onNavigate, onOpenAuth }) 
           onClose={() => setSelectedPatientId(null)}
           currentUser={currentUser}
         />
+      )}
+
+      {/* V12: Security Incident Detail Modal - Incomplete Breach-Response Workflow */}
+      {selectedIncident && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs">
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-2xl max-w-xl w-full overflow-hidden flex flex-col max-h-[90vh]">
+            {/* Modal Header */}
+            <div className="bg-slate-900 text-white px-6 py-4 flex items-center justify-between flex-shrink-0">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-lg bg-rose-600 flex items-center justify-center text-white">
+                  <ShieldAlert className="w-4 h-4" />
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold tracking-tight">Security Incident Investigation</h3>
+                  <p className="text-xs text-slate-400">Incident #{selectedIncident.id} • Unusual access detected</p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setSelectedIncident(null)}
+                className="text-slate-400 hover:text-white p-1 rounded-lg transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div className="p-6 overflow-y-auto space-y-4 text-xs text-slate-600">
+              <div className="p-3.5 rounded-xl border border-rose-200 bg-rose-50 text-rose-950 space-y-1">
+                <div className="font-bold text-xs">Incident Summary</div>
+                <p className="text-[11px] text-rose-800 leading-relaxed">
+                  {selectedIncident.description}
+                </p>
+                <div className="text-[10px] text-rose-700 font-mono pt-1">
+                  Detected Source: {selectedIncident.actor_id || 'External IP'} • Timestamp: {selectedIncident.timestamp ? new Date(selectedIncident.timestamp).toLocaleString() : 'Recorded'}
+                </div>
+              </div>
+
+              {/* V12: Uncorrelated Patient Records */}
+              <div className="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-slate-800 uppercase tracking-wider">
+                    Correlated Patient Records
+                  </span>
+                  <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300">
+                    0 correlated patient records
+                  </span>
+                </div>
+                <p className="text-[11px] text-slate-500 leading-relaxed">
+                  Telemetry gap: The underlying query access logs for this event sequence omitted individual resource identifiers (<code className="text-slate-700 font-mono">target_resource_id: null</code>). Consequently, MediVault cannot correlate or isolate which specific patient profiles or clinical documents were viewed.
+                </p>
+              </div>
+
+              {/* V12: Missing Notification Workflow */}
+              <div className="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-slate-800 uppercase tracking-wider">
+                    Data Principal Notification Pipeline
+                  </span>
+                  <span className="px-2 py-0.5 rounded-full text-[11px] font-bold bg-slate-200 text-slate-700">
+                    Unavailable
+                  </span>
+                </div>
+                <p className="text-[11px] text-slate-500 leading-relaxed">
+                  No notification channel is configured to notify affected individuals. Because patient records cannot be correlated and no notification dispatch mechanism exists, breach notices cannot be sent to affected data principals.
+                </p>
+              </div>
+            </div>
+
+            {/* Modal Footer - NO notify button exists */}
+            <div className="p-4 bg-slate-50 border-t border-slate-200 flex items-center justify-end flex-shrink-0">
+              <button
+                type="button"
+                onClick={() => setSelectedIncident(null)}
+                className="px-5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs shadow-xs transition-colors"
+              >
+                Close Incident Viewer
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   )

@@ -136,3 +136,26 @@ def test_staff_clinical_record_access(client):
     )
     assert doctor_resp.status_code == 200
     assert doctor_resp.json()["patient_id"] == "PAT-DEMO-002"
+
+
+def test_v12_security_incident_uncorrelated_patients(client):
+    """V12: Verify security incident alert returns 0 correlated patient records and unavailable notification workflow."""
+    doctor_token = get_token(client, "doctor@example.test")
+    headers = {"Authorization": f"Bearer {doctor_token}"}
+
+    # Fetch audit logs to find the breach alert
+    logs_resp = client.get("/api/staff/audit-logs", headers=headers)
+    assert logs_resp.status_code == 200
+    logs = logs_resp.json()
+    breach_alert = next((l for l in logs if l["status"] == "BREACH_ALERT"), None)
+    assert breach_alert is not None, "BREACH_ALERT not found in audit logs"
+
+    # Inspect incident details
+    incident_resp = client.get(f"/api/staff/security/incidents/{breach_alert['id']}", headers=headers)
+    assert incident_resp.status_code == 200
+    incident = incident_resp.json()
+    assert incident["incident_type"] == "UNUSUAL_ACCESS_DETECTED"
+    assert incident["correlated_records_count"] == 0
+    assert len(incident["affected_patients"]) == 0
+    assert "unavailable" in incident["notification_workflow_status"].lower()
+

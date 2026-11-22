@@ -92,3 +92,22 @@ class StaffAuditLogResponse(BaseModel):
     timestamp: datetime
 
     model_config = {"from_attributes": True}
+
+
+class SecurityIncidentResponse(BaseModel):
+    """V12: Security incident details illustrating incomplete breach-response workflow."""
+    id: int
+    incident_type: str
+    severity: str
+    description: str
+    timestamp: datetime
+    actor_id: Optional[str] = None
+    ip_address: Optional[str] = None
+    target_resource_id: Optional[str] = None
+    correlated_records_count: int = 0
+    affected_patients: List[str] = []
+    notification_workflow_status: str = "Unavailable: No notification dispatch channel configured"
+    remediation_status: str = "Pending manual investigation"
+
+    model_config = {"from_attributes": True}
+

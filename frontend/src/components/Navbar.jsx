@@ -25,7 +25,7 @@ export default function Navbar({ currentUser, onOpenAuth, onLogout, activeView, 
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-extrabold text-lg tracking-tight text-slate-900">MediVault</span>
+                <span className="font-extrabold text-lg tracking-tight text-slate-900">DawaiLelo</span>
               </div>
               <p className="text-[11px] text-slate-500 font-medium">Healthcare Patient &amp; Clinical Portal</p>
             </div>
@@ -36,18 +36,16 @@ export default function Navbar({ currentUser, onOpenAuth, onLogout, activeView, 
             <button
               type="button"
               onClick={() => handleNav('overview')}
-              className={`transition-colors ${
-                activeView === 'overview' ? 'text-sky-600 font-bold' : 'hover:text-slate-900'
-              }`}
+              className={`transition-colors ${activeView === 'overview' ? 'text-sky-600 font-bold' : 'hover:text-slate-900'
+                }`}
             >
               Overview
             </button>
             <button
               type="button"
               onClick={() => handleNav('patient-portal')}
-              className={`transition-colors flex items-center gap-1.5 ${
-                activeView === 'patient-portal' ? 'text-sky-600 font-bold' : 'hover:text-slate-900'
-              }`}
+              className={`transition-colors flex items-center gap-1.5 ${activeView === 'patient-portal' ? 'text-sky-600 font-bold' : 'hover:text-slate-900'
+                }`}
             >
               <Users className="w-4 h-4 text-slate-400" />
               Patient Portal
@@ -55,9 +53,8 @@ export default function Navbar({ currentUser, onOpenAuth, onLogout, activeView, 
             <button
               type="button"
               onClick={() => handleNav('medical-reports')}
-              className={`transition-colors flex items-center gap-1.5 ${
-                activeView === 'medical-reports' ? 'text-sky-600 font-bold' : 'hover:text-slate-900'
-              }`}
+              className={`transition-colors flex items-center gap-1.5 ${activeView === 'medical-reports' ? 'text-sky-600 font-bold' : 'hover:text-slate-900'
+                }`}
             >
               <FileText className="w-4 h-4 text-slate-400" />
               Medical Reports
@@ -65,9 +62,8 @@ export default function Navbar({ currentUser, onOpenAuth, onLogout, activeView, 
             <button
               type="button"
               onClick={() => handleNav('privacy-centre')}
-              className={`transition-colors flex items-center gap-1.5 ${
-                activeView === 'privacy-centre' ? 'text-sky-600 font-bold' : 'hover:text-slate-900'
-              }`}
+              className={`transition-colors flex items-center gap-1.5 ${activeView === 'privacy-centre' ? 'text-sky-600 font-bold' : 'hover:text-slate-900'
+                }`}
             >
               <Shield className="w-4 h-4 text-slate-400" />
               Privacy Centre
@@ -75,9 +71,8 @@ export default function Navbar({ currentUser, onOpenAuth, onLogout, activeView, 
             <button
               type="button"
               onClick={() => handleNav('staff-portal')}
-              className={`transition-colors flex items-center gap-1.5 ${
-                activeView === 'staff-portal' ? 'text-sky-600 font-bold' : 'hover:text-slate-900'
-              }`}
+              className={`transition-colors flex items-center gap-1.5 ${activeView === 'staff-portal' ? 'text-sky-600 font-bold' : 'hover:text-slate-900'
+                }`}
             >
               <Lock className="w-4 h-4 text-slate-400" />
               Staff Portal
