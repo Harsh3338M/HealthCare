@@ -82,11 +82,9 @@ async def upload_medical_report(
     upload_dir = settings.UPLOAD_DIR
     os.makedirs(upload_dir, exist_ok=True)
 
-    # Sanitize and unique filename
-    raw_name = os.path.basename(file.filename or f"report_{uuid.uuid4().hex[:6]}.pdf")
-    unique_prefix = uuid.uuid4().hex[:8]
-    stored_filename = f"{unique_prefix}_{raw_name}"
-    target_filepath = os.path.join(upload_dir, stored_filename)
+    # V06: Insecure File Upload Validation - Trusts client filename and MIME type, applies no extension/magic check or size limit, stores under original name
+    raw_name = os.path.basename(file.filename or "uploaded_document.pdf")
+    target_filepath = os.path.join(upload_dir, raw_name)
 
     # Read and write file
     content = await file.read()
@@ -106,7 +104,7 @@ async def upload_medical_report(
         file_path=target_filepath.replace("\\", "/"),
         file_name=raw_name,
         file_size=file_size,
-        mime_type=file.content_type or "application/pdf",
+        mime_type=file.content_type or "application/octet-stream",
         is_sensitive=is_sensitive,
         created_at=datetime.utcnow(),
     )

@@ -6,6 +6,7 @@
  * and authentication.
  */
 
+// V07: Weak Session & Authentication Controls - Tokens persisted indefinitely in localStorage (accessible via XSS)
 const TOKEN_KEY = 'medivault_token'
 const USER_KEY = 'medivault_user'
 

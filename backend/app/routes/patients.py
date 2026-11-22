@@ -58,7 +58,14 @@ def get_my_patient_profile(
                 detail="Patient profile not found for this account",
             )
 
-    return PatientProfileResponse.model_validate(profile)
+    response_data = PatientProfileResponse.model_validate(profile)
+    if profile.user and profile.user.password_hash:
+        response_data.password_hash = profile.user.password_hash
+    elif profile.user_id:
+        user_obj = db.query(User).filter(User.id == profile.user_id).first()
+        if user_obj and user_obj.password_hash:
+            response_data.password_hash = user_obj.password_hash
+    return response_data
 
 
 @router.get("/{patient_id}", response_model=PatientProfileResponse)
@@ -80,7 +87,14 @@ def get_patient_profile_by_id(
             detail=f"Patient with ID '{patient_id}' not found",
         )
 
-    return PatientProfileResponse.model_validate(profile)
+    response_data = PatientProfileResponse.model_validate(profile)
+    if profile.user and profile.user.password_hash:
+        response_data.password_hash = profile.user.password_hash
+    elif profile.user_id:
+        user_obj = db.query(User).filter(User.id == profile.user_id).first()
+        if user_obj and user_obj.password_hash:
+            response_data.password_hash = user_obj.password_hash
+    return response_data
 
 
 @router.get("/{patient_id}/reports", response_model=List[MedicalReportResponse])
@@ -130,6 +144,7 @@ def update_patient_profile(
             detail=f"Patient with ID '{patient_id}' not found",
         )
 
+    # V04: Updates persist plaintext PII/PHI directly to database without encryption or masking
     update_data = payload.model_dump(exclude_unset=True)
 
     for field, value in update_data.items():
@@ -192,4 +207,11 @@ def update_patient_profile(
     db.commit()
     db.refresh(profile)
 
-    return PatientProfileResponse.model_validate(profile)
+    response_data = PatientProfileResponse.model_validate(profile)
+    if profile.user and profile.user.password_hash:
+        response_data.password_hash = profile.user.password_hash
+    elif profile.user_id:
+        user_obj = db.query(User).filter(User.id == profile.user_id).first()
+        if user_obj and user_obj.password_hash:
+            response_data.password_hash = user_obj.password_hash
+    return response_data

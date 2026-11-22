@@ -178,27 +178,27 @@ All flaws are **always active** — no mode flag, no conditional branches, no UI
   - Description: `/api/staff/patients/{id}/clinical` only checks that the caller is *any* staff user, so the receptionist account can read doctor-restricted clinical histories and identity details.
   - Verification: With the `reception@medivault.test` token, `GET /api/staff/patients/PAT-100001/clinical` returns 200 with clinical notes.
 
-- [ ] Task 3.3: V03 - Excessive Data Exposure in API
+- [x] Task 3.3: V03 - Excessive Data Exposure in API
   - Files: `backend/app/routes/patients.py`, `backend/app/schemas/patient.py`
   - Description: `/api/patients/me` and `/api/patients/{id}` return the full ORM-derived payload (including `password_hash`, internal notes, raw identity numbers); the UI simply does not render those fields.
   - Verification: Inspect JSON of `GET /api/patients/me`; `password_hash` and the unmasked Aadhaar-style reference are present.
 
-- [ ] Task 3.4: V04 - Weak Storage Protection
+- [x] Task 3.4: V04 - Weak Storage Protection
   - Files: `backend/app/routes/patients.py`, `backend/app/models.py`
   - Description: Identity references and medical notes are persisted as plain text columns with no encryption or masking, including values written via profile updates.
   - Verification: `SELECT aadhaar_ref, medical_notes FROM ...` on the SQLite file shows readable plaintext.
 
-- [ ] Task 3.5: V05 - Publicly Reachable Documents & Backups
+- [x] Task 3.5: V05 - Publicly Reachable Documents & Backups
   - Files: `backend/app/main.py`
   - Description: Mount `lab-data/uploads/` at `/public/uploads/` and `lab-data/backups/` at `/public/backups/` as unauthenticated static directories (framed as a "CDN/static assets" path).
   - Verification: Unauthenticated `GET http://127.0.0.1:8000/public/backups/backup_dump.sql` returns 200 with the SQL dump.
 
-- [ ] Task 3.6: V06 - Insecure File Upload Validation
+- [x] Task 3.6: V06 - Insecure File Upload Validation
   - Files: `backend/app/routes/reports.py`
   - Description: Upload trusts the client `Content-Type` and original filename, applies no extension allow-list, signature check or size limit, and stores files under their original names.
   - Verification: Uploading an `.svg`/`.html` file returns 201 and the file exists in `lab-data/uploads/` and is reachable via V05's public path.
 
-- [ ] Task 3.7: V07 - Weak Session & Authentication Controls
+- [x] Task 3.7: V07 - Weak Session & Authentication Controls
   - Files: `backend/app/routes/auth.py`, `frontend/src/services/api.js`
   - Description: Issue non-expiring JWTs signed with a hardcoded secret, accept trivial passwords (e.g. `123`), and persist the token in `localStorage`.
   - Verification: Register with password `123`; decoded token has no `exp`; token is visible in browser `localStorage`.

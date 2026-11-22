@@ -45,9 +45,10 @@ class PatientProfile(Base):
     allergies = Column(Text, nullable=True)
     conditions = Column(Text, nullable=True)
     medications = Column(Text, nullable=True)
-    medical_notes = Column(Text, nullable=True)  # Doctor/clinical notes (V02/V04 target)
-    aadhaar_ref = Column(String(100), nullable=True)  # Aadhaar reference
-    ayushman_ref = Column(String(100), nullable=True)  # Ayushman reference
+    # V04: Weak Storage Protection - Sensitive clinical and identity data stored unencrypted in plaintext
+    medical_notes = Column(Text, nullable=True)
+    aadhaar_ref = Column(String(100), nullable=True)
+    ayushman_ref = Column(String(100), nullable=True)
     is_active = Column(Boolean, default=True, nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)

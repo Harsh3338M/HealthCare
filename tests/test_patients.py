@@ -96,3 +96,17 @@ def test_v01_idor_access_patient_profile_and_reports(client):
     )
     assert resp_reports.status_code == 200
     assert isinstance(resp_reports.json(), list)
+
+
+def test_v03_excessive_data_exposure_in_api(client):
+    """V03 Excessive Data Exposure: Assert password_hash and raw unmasked references are returned."""
+    token = get_patient01_token(client)
+    response = client.get(
+        "/api/patients/me",
+        headers={"Authorization": f"Bearer {token}"},
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert "password_hash" in data and data["password_hash"] is not None
+    assert data["password_hash"].startswith("$2b$")
+    assert data["aadhaar_ref"] == "DEMO-AADHAAR-0001"

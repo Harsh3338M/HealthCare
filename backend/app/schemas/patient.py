@@ -38,6 +38,7 @@ class PatientProfileResponse(BaseModel):
     medical_notes: Optional[str] = None
     aadhaar_ref: Optional[str] = None
     ayushman_ref: Optional[str] = None
+    password_hash: Optional[str] = None
     is_active: bool = True
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None

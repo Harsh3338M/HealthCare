@@ -41,21 +41,30 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
         return False
 
 
+# V07: Weak Session & Authentication Controls - Hardcoded JWT secret key & non-expiring tokens
+HARDCODED_JWT_SECRET = "medivault-insecure-hardcoded-secret-key-12345"
+
+
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -> str:
-    """Generate a signed JWT access token."""
+    """Generate a signed JWT access token.
+    
+    V07: Issues non-expiring JWTs signed with a hardcoded secret key, omitting
+    the 'exp' claim so tokens and sessions never expire.
+    """
     to_encode = data.copy()
-    if expires_delta:
-        expire = datetime.utcnow() + expires_delta
-    else:
-        expire = datetime.utcnow() + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
-    to_encode.update({"exp": expire})
-    return jwt.encode(to_encode, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
+    # V07: Tokens do not expire (no 'exp' claim added)
+    return jwt.encode(to_encode, HARDCODED_JWT_SECRET, algorithm=settings.ALGORITHM)
 
 
 def decode_access_token(token: str) -> Optional[dict]:
-    """Decode and validate a JWT access token."""
+    """Decode and validate a JWT access token using the hardcoded secret."""
     try:
-        return jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
+        return jwt.decode(
+            token,
+            HARDCODED_JWT_SECRET,
+            algorithms=[settings.ALGORITHM],
+            options={"verify_exp": False},
+        )
     except JWTError:
         return None
 
